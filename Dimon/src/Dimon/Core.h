@@ -8,3 +8,5 @@
 #else
 	#error Dimon only support windows! more and less!!
 #endif // DM_PLATFORM_WINDOWS
+
+#define BIT(x) (1 << x)
