@@ -58,6 +58,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>DM_PLATFORM_WINDOWS;DM_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dimon\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -72,6 +73,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>DM_PLATFORM_WINDOWS;DM_BUILD_DLL;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dimon\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -81,12 +83,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Dimon\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\Dimon\Events\Event.h" />
+    <ClInclude Include="src\Dimon\Events\KeyEvent.h" />
+    <ClInclude Include="src\Dimon\Events\MouseEvent.h" />
+    <ClInclude Include="src\Dimon\Log.h" />
     <ClInclude Include="src\Dimon.h" />
     <ClInclude Include="src\Dimon\Application.h" />
     <ClInclude Include="src\Dimon\Core.h" />
     <ClInclude Include="src\Dimon\Entry.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Dimon\Log.cpp" />
     <ClCompile Include="src\Dimon\Application.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -27,9 +27,27 @@
     <ClInclude Include="src\Dimon\Entry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dimon\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Events\Event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Events\KeyEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Events\MouseEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Events\ApplicationEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dimon\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dimon\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
