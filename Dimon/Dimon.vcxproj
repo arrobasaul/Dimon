@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>dmpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DM_PLATFORM_WINDOWS;DM_BUILD_DLL;GLFW_INCLUDE_NONE;DM_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -100,7 +100,7 @@
       <PrecompiledHeaderFile>dmpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DM_PLATFORM_WINDOWS;DM_BUILD_DLL;GLFW_INCLUDE_NONE;DM_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -124,7 +124,7 @@
       <PrecompiledHeaderFile>dmpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DM_PLATFORM_WINDOWS;DM_BUILD_DLL;GLFW_INCLUDE_NONE;DM_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -151,18 +151,22 @@
     <ClInclude Include="src\Dimon\Events\Event.h" />
     <ClInclude Include="src\Dimon\Events\KeyEvent.h" />
     <ClInclude Include="src\Dimon\Events\MouseEvent.h" />
+    <ClInclude Include="src\Dimon\Layer\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Dimon\Layer\Layer.h" />
     <ClInclude Include="src\Dimon\Layer\LeyerStack.h" />
     <ClInclude Include="src\Dimon\Log.h" />
     <ClInclude Include="src\Dimon\Window.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\dmpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dimon\Application.cpp" />
+    <ClCompile Include="src\Dimon\Layer\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Dimon\Layer\Layer.cpp" />
     <ClCompile Include="src\Dimon\Layer\LayerStack.cpp" />
     <ClCompile Include="src\Dimon\Log.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\dmpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -174,6 +178,9 @@
     </ProjectReference>
     <ProjectReference Include="vendor\GLAD\GLAD.vcxproj">
       <Project>{5D4A857C-4981-860D-F26D-6C10DE83020F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\ImGui\ImGui.vcxproj">
+      <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -5,9 +5,14 @@
 #include "Log.h"
 #include <GLAD/glad.h>
 namespace Dimon {
+
 #define BIND_EVENT_FN_CALLBACK(x) std::bind(&Application::x,this,std::placeholders::_1)
+
+	Application* Application::s_Instance = nullptr;
 	Application::Application()
 	{
+		DM_CORE_ASSERT(s_Instance,"no exist")
+		s_Instance = this;
 		m_Window =  std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN_CALLBACK(OnEvent));
 
@@ -29,9 +34,11 @@ namespace Dimon {
 	}
 	void Application::PushLayer(Layer* layer) {
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 	void Application::PushOverlay(Layer* layer) {
 		m_LayerStack.PushOverlay(layer);
+		layer->OnAttach();
 	}
 	void Application::Run()
 	{

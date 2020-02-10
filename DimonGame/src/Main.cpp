@@ -18,6 +18,7 @@ class DimonGame : public Dimon::Application
 public:
 	DimonGame() { 
 		PushLayer(new  ExampleLeyer()); 
+		PushOverlay(new Dimon::ImGuiLayer());
 	}
 	~DimonGame() {};
 };

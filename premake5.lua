@@ -21,14 +21,14 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Dimon/vendor/GLFW/include"
 IncludeDir["GLAD"] = "Dimon/vendor/GLAD/include"
---IncludeDir["ImGui"] = "Dimon/vendor/imgui"
+IncludeDir["ImGui"] = "Dimon/vendor/ImGui"
 --IncludeDir["glm"] = "Dimon/vendor/glm"
 --IncludeDir["stb_image"] = "Dimon/vendor/stb_image"
 
 group "Dependencies"
 	include "Dimon/vendor/GLFW"
 	include "Dimon/vendor/GLAD"
-	--include "Dimon/vendor/imgui"
+	include "Dimon/vendor/ImGui"
 
 group ""
 
@@ -65,8 +65,8 @@ project "Dimon"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.GLAD}"
-		--"%{IncludeDir.ImGui}",
+		"%{IncludeDir.GLAD}",
+		"%{IncludeDir.ImGui}",
 		--"%{IncludeDir.glm}",
 		--"%{IncludeDir.stb_image}"
 	}
@@ -75,7 +75,7 @@ project "Dimon"
 	{ 
 		"GLFW",
 		"GLAD",
-		--"ImGui",
+		"ImGui",
 		"opengl32.lib"
 	}
 

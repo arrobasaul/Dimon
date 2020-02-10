@@ -4,3 +4,6 @@
 [submodule "Dimon/vendor/GLFW"]
 	path = Dimon/vendor/GLFW
 	url = https://github.com/TheCherno/GLFW
+[submodule "Dimon/vendor/ImGui"]
+	path = Dimon/vendor/ImGui
+	url = https://github.com/TheCherno/imgui
