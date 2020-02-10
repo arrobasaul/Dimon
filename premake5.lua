@@ -20,14 +20,14 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Dimon/vendor/GLFW/include"
---IncludeDir["Glad"] = "Dimon/vendor/Glad/include"
+IncludeDir["GLAD"] = "Dimon/vendor/GLAD/include"
 --IncludeDir["ImGui"] = "Dimon/vendor/imgui"
 --IncludeDir["glm"] = "Dimon/vendor/glm"
 --IncludeDir["stb_image"] = "Dimon/vendor/stb_image"
 
 group "Dependencies"
 	include "Dimon/vendor/GLFW"
-	--include "Dimon/vendor/Glad"
+	include "Dimon/vendor/GLAD"
 	--include "Dimon/vendor/imgui"
 
 group ""
@@ -65,7 +65,7 @@ project "Dimon"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		--"%{IncludeDir.Glad}",
+		"%{IncludeDir.GLAD}"
 		--"%{IncludeDir.ImGui}",
 		--"%{IncludeDir.glm}",
 		--"%{IncludeDir.stb_image}"
@@ -74,7 +74,7 @@ project "Dimon"
 	links 
 	{ 
 		"GLFW",
-		--"Glad",
+		"GLAD",
 		--"ImGui",
 		"opengl32.lib"
 	}
@@ -86,7 +86,8 @@ project "Dimon"
 		defines
 		{
             "DM_PLATFORM_WINDOWS",
-			"DM_BUILD_DLL"
+			"DM_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
         }
 		
         
