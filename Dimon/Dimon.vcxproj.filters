@@ -7,6 +7,15 @@
     <Filter Include="Dimon\Events">
       <UniqueIdentifier>{00D98196-EC3B-113B-95C1-49F18103DDBD}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dimon\Layer">
+      <UniqueIdentifier>{68F6A590-D4AB-1E86-5DA0-185DC954158A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Dimon.h" />
@@ -31,21 +40,39 @@
     <ClInclude Include="src\Dimon\Events\MouseEvent.h">
       <Filter>Dimon\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dimon\Layer\Layer.h">
+      <Filter>Dimon\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Layer\LeyerStack.h">
+      <Filter>Dimon\Layer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Dimon\Log.h">
       <Filter>Dimon</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dimon\Window.h">
+      <Filter>Dimon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\dmpch.h" />
-    <ClInclude Include="src\Dimon\Window.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dimon\Application.cpp">
       <Filter>Dimon</Filter>
     </ClCompile>
+    <ClCompile Include="src\Dimon\Layer\Layer.cpp">
+      <Filter>Dimon\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dimon\Layer\LayerStack.cpp">
+      <Filter>Dimon\Layer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Dimon\Log.cpp">
       <Filter>Dimon</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\dmpch.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
 </Project>

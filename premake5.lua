@@ -86,24 +86,23 @@ project "Dimon"
 		defines
 		{
             "DM_PLATFORM_WINDOWS",
-			"DM_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
+			"DM_BUILD_DLL"
         }
-		--postbuildcommands { "copy bin/" .. outputdir .. "/%{prj.name}/%{prj.name}.dll bin\\project.config" }
+		
         
 	filter "configurations:Debug"
 		defines "DM_DEBUG"
-		runtime "Debug"
+		buildoptions "/MDd"
 		symbols "on"
 
 	filter "configurations:Release"
 		defines "DM_RELEASE"
-		runtime "Release"
+		buildoptions "/MD"
 		optimize "on"
 
 	filter "configurations:Dist"
 		defines "DM_DIST"
-		runtime "Release"
+		buildoptions "/MD"
 		optimize "on"
 
 project "DimonGame"
@@ -139,22 +138,22 @@ project "DimonGame"
         cppdialect "C++17"
         staticruntime "On"
 		systemversion "latest"
+		--postbuildcommands { "{COPY} %{cfg.buildtarget.relpaht} ../bin/" .. outputdir .. "/DemonGame" }
 		defines
 		{
-            "DM_PLATFORM_WINDOWS",
-			"GLFW_INCLUDE_NONE"
+            "DM_PLATFORM_WINDOWS"
 		}
 	filter "configurations:Debug"
 		defines "DM_DEBUG"
-		runtime "Debug"
+		buildoptions "/MDd"
 		symbols "on"
 
 	filter "configurations:Release"
 		defines "DM_RELEASE"
-		runtime "Release"
+		buildoptions "/MD"
 		optimize "on"
 
 	filter "configurations:Dist"
 		defines "DM_DIST"
-		runtime "Release"
+		buildoptions "/MD"
 		optimize "on"

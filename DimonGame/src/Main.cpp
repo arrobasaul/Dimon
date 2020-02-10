@@ -1,8 +1,24 @@
 #include <Dimon.h>
+class ExampleLeyer : public Dimon::Layer {
+public:
+	ExampleLeyer()
+		: Layer("Minecraf") {
+
+	}
+	void OnUpdate() override {
+		DM_CLIENT_INFO("ExampleLeyer::Update");
+	}
+	void OnEvent(Dimon::Event& event) override {
+		DM_CLIENT_TRACE("{0}", event);
+	}
+};
+
 class DimonGame : public Dimon::Application
 {
 public:
-	DimonGame() {};
+	DimonGame() { 
+		PushLayer(new  ExampleLeyer()); 
+	}
 	~DimonGame() {};
 };
 
