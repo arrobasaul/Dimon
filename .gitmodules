@@ -1,3 +1,6 @@
 [submodule "Dimon/vendor/spdlog"]
 	path = Dimon/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "Dimon/vendor/GLFW"]
+	path = Dimon/vendor/GLFW
+	url = https://github.com/TheCherno/GLFW

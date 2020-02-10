@@ -1,6 +1,5 @@
 #pragma once
 #include "Event.h"
-#include <sstream>
 namespace Dimon {
 
 	class MouseMovedEvent : public Event

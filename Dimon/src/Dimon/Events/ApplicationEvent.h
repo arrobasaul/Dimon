@@ -1,5 +1,5 @@
 #pragma once
-#include <sstream>
+
 #include "Event.h"
 
 namespace Dimon {
@@ -21,7 +21,7 @@ namespace Dimon {
 		}
 
 		EVENT_CLASS_TYPE(WindowResize)
-			EVENT_CLASS_CATEGORY(EventCategoryApplication)
+		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	private:
 		unsigned int m_Width, m_Height;
 	};

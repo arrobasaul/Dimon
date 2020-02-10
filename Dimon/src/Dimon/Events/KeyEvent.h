@@ -1,6 +1,6 @@
 #pragma once
+
 #include "Event.h"
-#include <sstream>
 namespace Dimon {
 
 	class KeyEvent : public Event
