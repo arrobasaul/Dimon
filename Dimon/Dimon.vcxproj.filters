@@ -10,8 +10,14 @@
     <Filter Include="Dimon\Layer">
       <UniqueIdentifier>{68F6A590-D4AB-1E86-5DA0-185DC954158A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dimon\Layer\ImGui">
+      <UniqueIdentifier>{929977E7-FEAF-757D-4727-019FB37C4605}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\OpenGL">
+      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
@@ -40,6 +46,9 @@
     <ClInclude Include="src\Dimon\Events\MouseEvent.h">
       <Filter>Dimon\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dimon\Layer\ImGui\ImGuiLayer.h">
+      <Filter>Dimon\Layer\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\Dimon\Layer\Layer.h">
       <Filter>Dimon\Layer</Filter>
     </ClInclude>
@@ -52,16 +61,20 @@
     <ClInclude Include="src\Dimon\Window.h">
       <Filter>Dimon</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRenderer.h">
+      <Filter>Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\dmpch.h" />
-    <ClInclude Include="src\Dimon\Layer\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dimon\Application.cpp">
       <Filter>Dimon</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dimon\Layer\ImGui\ImGuiLayer.cpp">
+      <Filter>Dimon\Layer\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Dimon\Layer\Layer.cpp">
       <Filter>Dimon\Layer</Filter>
@@ -72,11 +85,12 @@
     <ClCompile Include="src\Dimon\Log.cpp">
       <Filter>Dimon</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRenderer.cpp">
+      <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\dmpch.cpp" />
-    <ClCompile Include="src\Dimon\Layer\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLRenderer.cpp" />
   </ItemGroup>
 </Project>
