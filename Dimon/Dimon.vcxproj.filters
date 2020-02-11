@@ -58,6 +58,8 @@
     <ClInclude Include="src\dmpch.h" />
     <ClInclude Include="src\Dimon\Layer\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRenderer.h" />
+    <ClInclude Include="src\Dimon\Util\FileUtil.h" />
+    <ClInclude Include="src\Dimon\Shaders\ShaderLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dimon\Application.cpp">
@@ -78,5 +80,17 @@
     <ClCompile Include="src\dmpch.cpp" />
     <ClCompile Include="src\Dimon\Layer\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRenderer.cpp" />
+    <ClCompile Include="src\Dimon\Util\FileUtil.cpp" />
+    <ClCompile Include="src\Dimon\Shaders\ShaderLoader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Resources\Shaders\Basic.frag" />
+    <None Include="src\Resources\Shaders\Water.vert" />
+    <None Include="src\Resources\Shaders\Basic.vert" />
+    <None Include="src\Resources\Shaders\Chunk.frag" />
+    <None Include="src\Resources\Shaders\Chunk.vert" />
+    <None Include="src\Resources\Shaders\Flora.vert" />
+    <None Include="src\Resources\Shaders\Skybox.frag" />
+    <None Include="src\Resources\Shaders\Skybox.vert" />
   </ItemGroup>
 </Project>

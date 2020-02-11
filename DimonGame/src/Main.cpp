@@ -3,7 +3,6 @@ class ExampleLeyer : public Dimon::Layer {
 public:
 	ExampleLeyer()
 		: Layer("Minecraf") {
-
 	}
 	void OnUpdate() override {
 		DM_CLIENT_INFO("ExampleLeyer::Update");

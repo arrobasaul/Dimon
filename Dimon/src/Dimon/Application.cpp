@@ -4,6 +4,9 @@
 #include "Events/MouseEvent.h"
 #include "Log.h"
 #include <GLAD/glad.h>
+
+#include <Dimon/Shaders/ShaderLoader.h>
+
 namespace Dimon {
 
 #define BIND_EVENT_FN_CALLBACK(x) std::bind(&Application::x,this,std::placeholders::_1)
@@ -47,10 +50,13 @@ namespace Dimon {
 
 		MouseMovedEvent f(3234.55f, 12413.56f);
 		DM_CLIENT_ERROR(f);*/
+		//auto program = loadShaders("basic", "basic");
 		
 		while (m_Running) {
+			
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
+			//glUseProgram(program);
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
 

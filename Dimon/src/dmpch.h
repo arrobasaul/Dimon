@@ -12,6 +12,10 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include <fstream>
+#include <sstream>
+#include <stdexcept>
+
 #ifdef DM_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif // DM_PLATFORM_WINDOWS

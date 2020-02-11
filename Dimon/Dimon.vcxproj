@@ -155,6 +155,8 @@
     <ClInclude Include="src\Dimon\Layer\Layer.h" />
     <ClInclude Include="src\Dimon\Layer\LeyerStack.h" />
     <ClInclude Include="src\Dimon\Log.h" />
+    <ClInclude Include="src\Dimon\Shaders\ShaderLoader.h" />
+    <ClInclude Include="src\Dimon\Util\FileUtil.h" />
     <ClInclude Include="src\Dimon\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
@@ -166,6 +168,8 @@
     <ClCompile Include="src\Dimon\Layer\Layer.cpp" />
     <ClCompile Include="src\Dimon\Layer\LayerStack.cpp" />
     <ClCompile Include="src\Dimon\Log.cpp" />
+    <ClCompile Include="src\Dimon\Shaders\ShaderLoader.cpp" />
+    <ClCompile Include="src\Dimon\Util\FileUtil.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\dmpch.cpp">
@@ -182,6 +186,16 @@
     <ProjectReference Include="vendor\ImGui\ImGui.vcxproj">
       <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Resources\Shaders\Basic.frag" />
+    <None Include="src\Resources\Shaders\Basic.vert" />
+    <None Include="src\Resources\Shaders\Chunk.frag" />
+    <None Include="src\Resources\Shaders\Chunk.vert" />
+    <None Include="src\Resources\Shaders\Flora.vert" />
+    <None Include="src\Resources\Shaders\Skybox.frag" />
+    <None Include="src\Resources\Shaders\Skybox.vert" />
+    <None Include="src\Resources\Shaders\Water.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
