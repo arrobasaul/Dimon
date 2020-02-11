@@ -187,16 +187,6 @@
       <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="src\Resources\Shaders\Basic.frag" />
-    <None Include="src\Resources\Shaders\Basic.vert" />
-    <None Include="src\Resources\Shaders\Chunk.frag" />
-    <None Include="src\Resources\Shaders\Chunk.vert" />
-    <None Include="src\Resources\Shaders\Flora.vert" />
-    <None Include="src\Resources\Shaders\Skybox.frag" />
-    <None Include="src\Resources\Shaders\Skybox.vert" />
-    <None Include="src\Resources\Shaders\Water.vert" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
