@@ -19,4 +19,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shaders\fist.frag" />
+    <None Include="Resources\Shaders\fist.vert" />
+  </ItemGroup>
 </Project>

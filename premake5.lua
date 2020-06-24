@@ -1,7 +1,6 @@
 workspace "Dimon"
     architecture "x64"
     startproject "DimonGame"
-	--startproject "DimonGame"
 
 	configurations
 	{
@@ -22,7 +21,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Dimon/vendor/GLFW/include"
 IncludeDir["GLAD"] = "Dimon/vendor/GLAD/include"
 IncludeDir["ImGui"] = "Dimon/vendor/ImGui"
---IncludeDir["glm"] = "Dimon/vendor/glm"
+IncludeDir["glm"] = "Dimon/vendor/glm"
 --IncludeDir["stb_image"] = "Dimon/vendor/stb_image"
 
 group "Dependencies"
@@ -34,10 +33,10 @@ group ""
 
 project "Dimon"
 	location "Dimon"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
-	--cppdialect "C++17"
-	--staticruntime "on"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -51,12 +50,13 @@ project "Dimon"
 		"%{prj.name}/src/**.cpp",
 		--"%{prj.name}/vendor/stb_image/**.h",
 		--"%{prj.name}/vendor/stb_image/**.cpp",
-		--"%{prj.name}/vendor/glm/glm/**.hpp",
-		--"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
 
 	--defines
 	--{
+	--	"IMGUI_API=__declspec(dllexport)"
 	--	"_CRT_SECURE_NO_WARNINGS"
 	--}
 
@@ -67,10 +67,13 @@ project "Dimon"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.GLAD}",
 		"%{IncludeDir.ImGui}",
-		--"%{IncludeDir.glm}",
+		"%{IncludeDir.glm}",
 		--"%{IncludeDir.stb_image}"
 	}
-
+	defines
+		{
+			"_CRT_SECURE_NO_WARNINGS"
+        }
 	links 
 	{ 
 		"GLFW",
@@ -81,37 +84,38 @@ project "Dimon"
 
 	filter "system:windows"
 		cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
 		defines
 		{
             "DM_PLATFORM_WINDOWS",
 			"DM_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
+			"GLFW_INCLUDE_NONE",
+			"_CRT_SECURE_NO_WARNINGS"
         }
-		
+		--postbuildcommands { ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/DimonGame") }
+		--postbuildcommands { ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/DimonGame/\"") }
         
 	filter "configurations:Debug"
 		defines "DM_DEBUG"
-		buildoptions "/MDd"
+		runtime "debug"
 		symbols "on"
 
 	filter "configurations:Release"
 		defines "DM_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "on"
 
 	filter "configurations:Dist"
 		defines "DM_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "on"
 
 project "DimonGame"
 	location "DimonGame"
 	kind "ConsoleApp"
 	language "C++"
-	--cppdialect "C++17"
-	--staticruntime "on"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -126,8 +130,8 @@ project "DimonGame"
 	{
 		"Dimon/vendor/spdlog/include",
 		"Dimon/src",
-        "Dimon/vendor"
-        --,"%{IncludeDir.glm}"
+        "Dimon/vendor",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -137,24 +141,23 @@ project "DimonGame"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "On"
 		systemversion "latest"
-		--postbuildcommands { "{COPY} %{cfg.buildtarget.relpaht} ../bin/" .. outputdir .. "/DemonGame" }
+		
 		defines
 		{
             "DM_PLATFORM_WINDOWS"
 		}
 	filter "configurations:Debug"
 		defines "DM_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Release"
 		defines "DM_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "on"
 
 	filter "configurations:Dist"
 		defines "DM_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "on"

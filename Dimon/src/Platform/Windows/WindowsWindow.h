@@ -1,6 +1,6 @@
 #pragma once
 #include "Dimon/Window.h"
-
+#include "Dimon/Render/GraphicsContext.h"
 #include <GLFW/glfw3.h>
 
 namespace Dimon {
@@ -20,13 +20,13 @@ namespace Dimon {
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
-		//inline virtual void* GetNativeWindow() const { return m_Window; }
+		inline virtual void* GetNativeWindow() const { return m_Window; }
 	private:
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
-		//Scope<GraphicsContext> m_Context;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{

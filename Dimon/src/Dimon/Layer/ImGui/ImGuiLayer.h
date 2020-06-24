@@ -9,20 +9,22 @@ namespace Dimon {
 		ImGuiLayer();
 		~ImGuiLayer();
 
-		void OnAttach();
-		void OnDetach();
-		void OnUpdate(/*Timestep ts*/);
-		void OnImGuiRender();
-		void OnEvent(Event& event);
+		virtual void OnAttach() override;
+		virtual void OnDetach() override;
+		//void OnUpdate(/*Timestep ts*/) override;
+		virtual void OnImGuiRender() override;
+		//void OnEvent(Event& event);
+		void Begin();
+		void End();
 	private:
-		bool OnKeyPressedEvent(KeyPressedEvent& e);
+		/*bool OnKeyPressedEvent(KeyPressedEvent& e);
 		bool OnKeyReleasedEvent(KeyReleasedEvent& e);
 		bool OnKeyTypedEvent(KeyTypedEvent& e);
 		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
 		bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
 		bool OnMouseMovedEvent(MouseMovedEvent& e);
 		bool OnMouseScrolledEvent(MouseScrolledEvent& e);
-		bool OnWindowResizeEvent(WindowResizeEvent& e);
+		bool OnWindowResizeEvent(WindowResizeEvent& e);*/
 	private:
 		float m_Time = 0.0f;
 	};

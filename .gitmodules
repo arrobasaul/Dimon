@@ -7,3 +7,6 @@
 [submodule "Dimon/vendor/ImGui"]
 	path = Dimon/vendor/ImGui
 	url = https://github.com/TheCherno/imgui
+[submodule "Dimon/vendor/glm"]
+	path = Dimon/vendor/glm
+	url = https://github.com/g-truc/glm

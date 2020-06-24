@@ -1,5 +1,4 @@
 #pragma once
-
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -15,6 +14,18 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+
+//Vulkan 
+
+#include <optional>
+#include <set>
+//For net
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include <thread>
 
 #ifdef DM_PLATFORM_WINDOWS
 	#include <Windows.h>

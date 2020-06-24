@@ -8,8 +8,8 @@
 #include "Dimon/Events/KeyEvent.h"
 #include "Platform/Windows/WindowsWindow.h"
 //#include "Hazel/Renderer/Renderer.h"
-//#include "Platform/OpenGL/OpenGLContext.h"
-#include <glad/glad.h>
+#include "Platform/OpenGL/OpenGLContext.h"
+#include "Platform/Vulkan//VulkanContext.h"
 namespace Dimon {
 
 	static uint8_t s_GLFWWindowCount = 0;
@@ -63,19 +63,16 @@ namespace Dimon {
 //				glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 //#endif
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
 		
-
-
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		DM_CORE_ASSERT(status,"Error to inicialize GLAD")
 			//glfwSetWindowUserPointer(m_Window, &m_Data);
 			//SetVSync(true);
 			//++s_GLFWWindowCount;
 		//}
+		m_Context = new VulkanContext(m_Window);
+		auto m_Context2 = static_cast<VulkanContext*>(m_Context);
 
-		//m_Context = GraphicsContext::Create(m_Window);
-		//m_Context->Init();
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
@@ -189,8 +186,7 @@ namespace Dimon {
 		//DM_PROFILE_FUNCTION();
 
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
-		//m_Context->SwapBuffers();
+		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)
