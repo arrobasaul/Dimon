@@ -4,7 +4,9 @@
 #include "Events/MouseEvent.h"
 #include "Log.h"
 #include <glad/glad.h>
-#include "Platform/Vulkan/VulkanContext.h"
+#include "Render/RendererCommand.h"
+#include "Render/Renderer.h"
+//#include "Platform/Vulkan/VulkanContext.h"
 //#include "CoreInput.h"
 namespace Dimon {
 
@@ -26,30 +28,50 @@ namespace Dimon {
 		//For Render
 		//Vertex Array
 		m_vertexArray.reset(VertexArray::Create());
-
 		float vertices[7 * 3] = {
 			0.5f,1.0f,0.0f,0.8f,0.2f,0.8f,1.0f,
 			0.0f,0.0f,0.0f,0.2f,0.3f,0.8f,1.0f,
 			1.0f,0.0f,0.0f,0.8f,0.8f,0.2f,1.0f
 		};
 		
-
+		std::shared_ptr<VertexBuffer> m_VertexBuffer;
 		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 		BufferLayout layout = {
 			{ShaderDataType::Float3,"a_Position"},
 			{ShaderDataType::Float4,"a_Color"}
 		};
 		m_VertexBuffer->SetLayout(layout);
-		
-
 		m_vertexArray->AddVertexBuffer(m_VertexBuffer);
 
 		unsigned int indices[3] = { 0,1,2 };
-		//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		std::shared_ptr<IndexBuffer> m_IndexBuffer;
 		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_vertexArray->AddIndexBuffer(m_IndexBuffer);
 
+
+		m_SquereVertexArray.reset(VertexArray::Create());
+		float vertices2[3 * 4] = {
+		   -0.5f, -0.5f, 0.0f,
+			0.5f, -0.5f, 0.0f,
+			0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f
+		}; 
+
+		std::shared_ptr<VertexBuffer> squereVB;
+		squereVB.reset(VertexBuffer::Create(vertices2, sizeof(vertices2)));
+		BufferLayout layout2 = {
+			{ShaderDataType::Float3,"a_Position"}
+		};
+		squereVB->SetLayout(layout2);
+		m_SquereVertexArray->AddVertexBuffer(squereVB);
+
+		unsigned int indices2[6] = { 0, 1, 2, 0, 2, 3 };
+		std::shared_ptr<IndexBuffer> squereIB;
+		squereIB.reset(IndexBuffer::Create(indices2, sizeof(indices2) / sizeof(uint32_t)));
+		m_SquereVertexArray->AddIndexBuffer(squereIB);
+
 		m_Shader.reset(new Shader("fist","fist"));
+		m_Shader2.reset(new Shader("fist2", "fist2"));
 	}
 	void Application::OnEvent(Event& e) {
 		EventDispatcher dispacher(e);
@@ -88,14 +110,35 @@ namespace Dimon {
 
 		while (m_Running) {
 			//contextVulkan.drawFrame();
-			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 			
-			m_vertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
-			//glUseProgram(program);
-			m_VertexBuffer->Bind();
+			RendererCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+
+			RendererCommand::Clear();
+
+			Renderer::BeginScene();
+
+			m_Shader2->Bind();
+			Renderer::Submit(m_SquereVertexArray);
+
 			m_Shader->Bind();
+			Renderer::Submit(m_vertexArray);
+
+			Renderer::EndScene();
+			/*
+			m_Shader2->Bind();
+			m_SquereVertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_SquereVertexArray->GetIndexBuffers()->GetCount(), GL_UNSIGNED_INT, nullptr);
+
+
+			m_Shader->Bind();
+			m_vertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_vertexArray->GetIndexBuffers()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			*/
+			//glUseProgram(program);
+			//m_VertexBuffer->Bind();
+			
+
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
 

@@ -22,6 +22,10 @@ namespace Dimon {
 		DM_CORE_ASSERT(false, "unknown ShaderDataType");
 		return 0;
 	}
+	OpenGLVertexArray::~OpenGLVertexArray()
+	{
+		glDeleteVertexArrays(1, &m_RenderID);
+	}
 	OpenGLVertexArray::OpenGLVertexArray() {
 		glCreateVertexArrays(1, &m_RenderID);
 	}
@@ -35,7 +39,7 @@ namespace Dimon {
 	}
 	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
 	{
-		DM_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Bubberr has no Layout");
+		DM_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no Layout");
 
 		glBindVertexArray(m_RenderID);
 		vertexBuffer->Bind();

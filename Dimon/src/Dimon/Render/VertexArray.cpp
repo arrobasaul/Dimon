@@ -7,8 +7,8 @@ namespace Dimon {
 	{
 		switch (Renderer::GetAPI())
 		{
-			case RendererAPI::None:			DM_CORE_ASSERT(false, "RendererAPI::None no supported"); return nullptr;
-			case RendererAPI::OpenGL:		return new OpenGLVertexArray();
+			case RendererAPI::API::None:		DM_CORE_ASSERT(false, "RendererAPI::None no supported"); return nullptr;
+			case RendererAPI::API::OpenGL:		return new OpenGLVertexArray();
 		default:
 			break;
 		}

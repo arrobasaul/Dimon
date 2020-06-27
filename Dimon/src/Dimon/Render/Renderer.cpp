@@ -1,5 +1,17 @@
 #include "dmpch.h"
-#include "Dimon/Render/Renderer.h"
+#include "Renderer.h"
+#include "RendererCommand.h"
 namespace Dimon {
-	RendererAPI  Renderer::s_RenderAPI = RendererAPI::OpenGL;
+
+	void Renderer::BeginScene()
+	{
+	}
+	void Renderer::EndScene()
+	{
+	}
+	void Renderer::Submit(const std::shared_ptr<VertexArray>& vertexArray)
+	{
+		vertexArray->Bind();
+		RendererCommand::DrawIndexed(vertexArray);
+	}
 }

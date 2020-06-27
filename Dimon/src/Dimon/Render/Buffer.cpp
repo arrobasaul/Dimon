@@ -8,8 +8,8 @@ namespace Dimon {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:			DM_CORE_ASSERT(false, "RendererAPI::None no supported"); return nullptr;
-		case RendererAPI::OpenGL:		return new OpenGLVertexBuffer(vertices, size);
+		case RendererAPI::API::None:			DM_CORE_ASSERT(false, "RendererAPI::None no supported"); return nullptr;
+		case RendererAPI::API::OpenGL:		return new OpenGLVertexBuffer(vertices, size);
 		default:
 			break;
 		}
@@ -20,8 +20,8 @@ namespace Dimon {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:			DM_CORE_ASSERT(false, "RendererAPI::None no supported"); return nullptr;
-		case RendererAPI::OpenGL:		return new OpenGLIndexBuffer(indices, size);
+		case RendererAPI::API::None:			DM_CORE_ASSERT(false, "RendererAPI::None no supported"); return nullptr;
+		case RendererAPI::API::OpenGL:		return new OpenGLIndexBuffer(indices, size);
 		default:
 			break;
 		}

@@ -29,10 +29,12 @@ namespace Dimon {
 		ImGuiLayer* m_ImGuiLayer;
 		LayerStack  m_LayerStack;
 		static Application* s_Instance;
+
 		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexBuffer> m_VertexBuffer;
-		std::shared_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<Shader> m_Shader2;
+
 		std::shared_ptr<VertexArray> m_vertexArray;
+		std::shared_ptr<VertexArray> m_SquereVertexArray;
 	};
 	Application* CreateApplication();
 }
