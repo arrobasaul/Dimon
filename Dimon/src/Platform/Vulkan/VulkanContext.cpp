@@ -1,3 +1,4 @@
+
 #include "dmpch.h"
 #include "VulkanContext.h"
 
@@ -16,7 +17,6 @@ namespace Dimon {
 	{
 		glfwInit();
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-		//glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 		m_Window = glfwCreateWindow(WIDTH, HEIGHT, "Vulkan window", nullptr, nullptr);
         glfwSetWindowUserPointer(m_Window, this);
         glfwSetFramebufferSizeCallback(m_Window, framebufferResizeCallback);

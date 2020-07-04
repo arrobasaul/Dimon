@@ -5,8 +5,37 @@
 #include "Dimon/Log.h"
 
 #include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
+
+#include "Dimon/Render/Renderer.h"
+#include "Platform/OpenGL/OpenGLShader.h"
+
 namespace Dimon {
-    uint32_t Shader::compileShader(const char* source, uint32_t shaderType)
+    Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexShader, const std::string& fragmentShader)
+    {
+        switch (Renderer::GetAPI())
+        {
+        case RendererAPI::API::None:		DM_CORE_ASSERT(false, "RendererAPI::None no supported"); return nullptr;
+        case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLShader>(name, vertexShader, fragmentShader);
+        default:
+            break;
+        }
+        DM_CORE_ASSERT(false, "UnKnown");
+        return nullptr;
+    }
+    Ref<Shader> Shader::Create(const std::string& vertexShader, const std::string& fragmentShader)
+    {
+        switch (Renderer::GetAPI())
+        {
+        case RendererAPI::API::None:		DM_CORE_ASSERT(false, "RendererAPI::None no supported"); return nullptr;
+        case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLShader>(vertexShader, fragmentShader);
+        default:
+            break;
+        }
+        DM_CORE_ASSERT(false, "UnKnown");
+        return nullptr;
+    }
+    /*uint32_t Shader::compileShader(const char* source, uint32_t shaderType)
     {
         auto shaderID = glCreateShader(shaderType);
 
@@ -25,9 +54,9 @@ namespace Dimon {
         }
 
         return shaderID;
-    }
+    }*/
 
-    uint32_t Shader::linkProgram(uint32_t vertexShaderID, uint32_t fragmentShaderID)
+    /*uint32_t Shader::linkProgram(uint32_t vertexShaderID, uint32_t fragmentShaderID)
     {
         GLuint program = glCreateProgram();
 
@@ -51,40 +80,29 @@ namespace Dimon {
             glDeleteShader(fragmentShaderID);
         }
         return program;
-    }
-    void Shader::Bind() const
+    }*/
+    void ShaderLibrery::Add(const Ref<Shader>& shader)
     {
-        glUseProgram(m_RenderID);
+        auto name = shader->GetName();
+        DM_CORE_ASSERT(m_Shader.find(name) == m_Shader.end(), "Shader already exist");
+        m_Shader[name] = shader;
     }
-    void Shader::UnBind() const
+    Ref<Shader> ShaderLibrery::Load(const std::string& vertexShader, const std::string& fragmentShader)
     {
-        glUseProgram(0);
+        auto shader = Shader::Create(vertexShader, fragmentShader);
+        Add(shader);
+        return shader;
     }
-    uint32_t Shader::loadShaders(const std::string& vertexShader, const std::string& fragmentShader)
+    Ref<Shader> ShaderLibrery::Load(const std::string& name, const std::string& vertexShader, const std::string& fragmentShader)
     {
-        auto vertexSource = getFileContents("D:/Code/c++/OpenGLRoot/Dimon/DimonGame/Resources/Shaders/" + vertexShader + ".vert");
-        auto fragmentSource = getFileContents("D:/Code/c++/OpenGLRoot/Dimon/DimonGame/Resources/Shaders/" + fragmentShader + ".frag");
-
-        auto vertexShaderID = compileShader(vertexSource.c_str(), GL_VERTEX_SHADER);
-        auto fragmentShaderID = compileShader(fragmentSource.c_str(), GL_FRAGMENT_SHADER);
-
-        m_RenderID = linkProgram(vertexShaderID, fragmentShaderID);
-
-        glDetachShader(m_RenderID,vertexShaderID);
-        glDetachShader(m_RenderID,fragmentShaderID);
-
-        //glDeleteShader(vertexShaderID);
-        //glDeleteShader(fragmentShaderID);
-
-        return m_RenderID;
+        auto shader = Shader::Create(name, vertexShader, fragmentShader);
+        Add(shader);
+        return shader;
     }
-    Shader::Shader(const std::string& vertexShader, const std::string& fragmentShader)
+    Ref<Shader> ShaderLibrery::Get(const std::string& name)
     {
-        loadShaders(vertexShader, fragmentShader);
-    }
-    Shader::~Shader()
-    {
-        glDeleteProgram(m_RenderID);
+        DM_CORE_ASSERT(m_Shader.find(name) != m_Shader.end(), "Shader not found");
+        return m_Shader[name];
     }
 } // namespace
 

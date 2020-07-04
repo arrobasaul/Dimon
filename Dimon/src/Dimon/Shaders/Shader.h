@@ -1,18 +1,28 @@
 #pragma once
-
+#include "Dimon/Core.h"
+#include <unordered_map>
 namespace Dimon {
 	class Shader {
 	public:
-		void Bind() const;
-		void UnBind() const;
-		
-		Shader(const std::string& vertexShader, const std::string& fragmentShader);
-		~Shader();
-	private:
-		uint32_t loadShaders(const std::string& vertexShader, const std::string& fragmentShader);
-		uint32_t compileShader(const char* source, uint32_t shaderType);
-		uint32_t linkProgram(uint32_t vertexShaderID, uint32_t fragmentShaderID);
-		uint32_t m_RenderID;
+		virtual ~Shader() = default;
+
+		virtual void Bind() const = 0;
+		virtual void UnBind() const = 0;
+
+		virtual const std::string& GetName() const = 0;
+
+		static Ref<Shader> Create(const std::string& vertexShader, const std::string& fragmentShader);
+		static Ref<Shader> Create(const std::string& name, const std::string& vertexShader, const std::string& fragmentShader);
 	};
-	
+	class ShaderLibrery {
+	public:
+		void Add(const Ref<Shader>& shader);
+		Ref<Shader> Load(const std::string& vertexShader, const std::string& fragmentShader);
+		Ref<Shader> Load(const std::string& name, const std::string& vertexShader, const std::string& fragmentShader);
+
+		Ref<Shader> Get(const std::string& name);
+	private:
+
+		std::unordered_map<std::string, Ref<Shader>> m_Shader;
+	};
 }

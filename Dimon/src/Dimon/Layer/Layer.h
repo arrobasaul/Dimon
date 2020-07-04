@@ -1,6 +1,6 @@
 #pragma once
 #include "Dimon/Core.h"
-//#include "Dimon/Core/Timestep.h"
+#include "Dimon/Util/TimeStep.h"
 #include "Dimon/Events/Event.h"
 
 namespace Dimon {
@@ -13,7 +13,7 @@ namespace Dimon {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate(/*Timestep ts*/) {}
+		virtual void OnUpdate(TimeStep timeStep) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

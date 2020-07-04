@@ -8,6 +8,7 @@
 #include "Dimon/Shaders/Shader.h"
 #include "Render/Buffer.h"
 #include "Render/VertexArray.h"
+#include "Render/OrthographicCamera.h"
 namespace Dimon {
 	class DIMON_API Application
 	{
@@ -30,11 +31,9 @@ namespace Dimon {
 		LayerStack  m_LayerStack;
 		static Application* s_Instance;
 
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<Shader> m_Shader2;
-
-		std::shared_ptr<VertexArray> m_vertexArray;
-		std::shared_ptr<VertexArray> m_SquereVertexArray;
+		float m_LastFrameTime;
+		
+		//glm::vec3 CamaraPosition = { 1.0f, 1.0f, 1.0f };
 	};
 	Application* CreateApplication();
 }

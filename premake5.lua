@@ -22,7 +22,7 @@ IncludeDir["GLFW"] = "Dimon/vendor/GLFW/include"
 IncludeDir["GLAD"] = "Dimon/vendor/GLAD/include"
 IncludeDir["ImGui"] = "Dimon/vendor/ImGui"
 IncludeDir["glm"] = "Dimon/vendor/glm"
---IncludeDir["stb_image"] = "Dimon/vendor/stb_image"
+IncludeDir["stb_image"] = "Dimon/vendor/stb_image"
 
 group "Dependencies"
 	include "Dimon/vendor/GLFW"
@@ -48,8 +48,8 @@ project "Dimon"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
-		--"%{prj.name}/vendor/stb_image/**.h",
-		--"%{prj.name}/vendor/stb_image/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
@@ -68,7 +68,7 @@ project "Dimon"
 		"%{IncludeDir.GLAD}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		--"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}"
 	}
 	defines
 		{

@@ -52,7 +52,7 @@ namespace Dimon {
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
 
 		ImGui_ImplOpenGL3_Init("#version 410");
-		//auto chat = std::shared_ptr<ChatServer>(ChatServer::Get());
+		//auto chat = Ref<ChatServer>(ChatServer::Get());
 		//std::thread t((chat));
 	}
 	void ImGuiLayer::OnDetach()

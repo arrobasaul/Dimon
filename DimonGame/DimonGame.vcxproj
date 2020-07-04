@@ -138,10 +138,6 @@
       <Project>{9CF4080D-0809-31BE-D18A-D41D3D5E2DEF}</Project>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Shaders\fist.frag" />
-    <None Include="Resources\Shaders\fist.vert" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
