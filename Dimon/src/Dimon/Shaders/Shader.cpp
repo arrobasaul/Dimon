@@ -2,7 +2,7 @@
 
 #include "Shader.h"
 #include "Dimon/Util/FileUtil.h"
-#include "Dimon/Log.h"
+#include "Dimon/Core/Log.h"
 
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>

@@ -2,7 +2,7 @@
 #include "Buffer.h"
 #include "Dimon/Render/Renderer.h"
 #include "Platform/OpenGL/OpenGLBuffer.h"
-#include <Dimon\Core.h>
+#include "Dimon/Core/Core.h"
 namespace Dimon {
 	VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)
 	{

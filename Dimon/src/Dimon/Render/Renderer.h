@@ -9,6 +9,8 @@ namespace Dimon {
 
 	public:
 		static void Init();
+		static void OnwindowsResized(uint32_t width, uint32_t heigth);
+
 		static void BeginScene(OrthographicCamera& camera);
 		static void EndScene();
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "dmpch.h"
 
-#include "Dimon/Core.h"
+#include "Dimon/Core/Core.h"
 #include "Dimon/Events/Event.h"
 
 namespace Dimon {

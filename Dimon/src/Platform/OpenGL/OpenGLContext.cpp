@@ -2,8 +2,8 @@
 #include "OpenGLContext.h"
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
-#include <Dimon/Core.h>
-#include "Dimon/Log.h"
+#include "Dimon/Core/Core.h"
+#include "Dimon/Core/Log.h"
 namespace Dimon {
 	OpenGLContext::OpenGLContext(GLFWwindow* window)
 		: m_Window(window)

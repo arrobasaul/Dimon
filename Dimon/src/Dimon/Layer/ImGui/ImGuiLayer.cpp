@@ -9,8 +9,8 @@
 //#include "Platform/OpenGL/OpenGLRenderer.h"
 
 #include "GLFW/glfw3.h"
-#include "Dimon/Application.h"
-#include "Dimon/Core.h"
+#include "Dimon/Core/Application.h"
+#include "Dimon/Core/Core.h"
 
 #include "glad/glad.h"
 #include "Dimon/Network/ChatServer.h"

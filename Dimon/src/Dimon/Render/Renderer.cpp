@@ -1,6 +1,7 @@
 #include "dmpch.h"
 #include "Renderer.h"
 #include "RendererCommand.h"
+#include "Renderer2D.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Dimon {
@@ -8,6 +9,11 @@ namespace Dimon {
 	void Renderer::Init()
 	{
 		RendererCommand::Init();
+		Renderer2D::Init();
+	}
+	void Renderer::OnwindowsResized(uint32_t width, uint32_t height)
+	{
+		RendererCommand::SetViewPort(0,0, width, height);
 	}
 	void Renderer::BeginScene(OrthographicCamera& camera)
 	{

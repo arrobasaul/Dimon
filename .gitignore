@@ -5,3 +5,4 @@ Dimon/vendor/Vulkan/
 *.user
 *.exe
 *.bat
+DimonGame/*.json

@@ -37,7 +37,7 @@ namespace Dimon {
 	{
 		glBindVertexArray(0);
 	}
-	void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
+	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
 	{
 		DM_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no Layout");
 
@@ -56,7 +56,7 @@ namespace Dimon {
 		}
 		m_VertexBuffers.push_back(vertexBuffer);
 	}
-	void OpenGLVertexArray::AddIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
+	void OpenGLVertexArray::AddIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
 	{
 		glBindVertexArray(m_RenderID);
 		indexBuffer->Bind();

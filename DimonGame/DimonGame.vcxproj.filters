@@ -18,13 +18,13 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Sandbox2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Shaders\fist.frag" />
-    <None Include="Resources\Shaders\fist.vert" />
-    <None Include="Resources\Shaders\fist2.frag" />
-    <None Include="Resources\Shaders\fist2.vert" />
-    <None Include="Resources\Shaders\TextShader.frag" />
-    <None Include="Resources\Shaders\TextShader.vert" />
+    <ClInclude Include="src\Sandbox2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

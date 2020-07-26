@@ -144,32 +144,35 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Dimon.h" />
-    <ClInclude Include="src\Dimon\Application.h" />
-    <ClInclude Include="src\Dimon\Core.h" />
-    <ClInclude Include="src\Dimon\CoreInput.h" />
-    <ClInclude Include="src\Dimon\Entry.h" />
+    <ClInclude Include="src\Dimon\Core\Application.h" />
+    <ClInclude Include="src\Dimon\Core\Core.h" />
+    <ClInclude Include="src\Dimon\Core\CoreInput.h" />
+    <ClInclude Include="src\Dimon\Core\Entry.h" />
+    <ClInclude Include="src\Dimon\Debug\Intrumentor.h" />
     <ClInclude Include="src\Dimon\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Dimon\Events\Event.h" />
     <ClInclude Include="src\Dimon\Events\KeyEvent.h" />
     <ClInclude Include="src\Dimon\Events\MouseEvent.h" />
-    <ClInclude Include="src\Dimon\KeyCodes.h" />
+    <ClInclude Include="src\Dimon\Core\KeyCodes.h" />
     <ClInclude Include="src\Dimon\Layer\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Dimon\Layer\Layer.h" />
     <ClInclude Include="src\Dimon\Layer\LeyerStack.h" />
-    <ClInclude Include="src\Dimon\Log.h" />
-    <ClInclude Include="src\Dimon\MouseCodes.h" />
+    <ClInclude Include="src\Dimon\Core\Log.h" />
+    <ClInclude Include="src\Dimon\Core\MouseCodes.h" />
     <ClInclude Include="src\Dimon\Network\ChatServer.h" />
     <ClInclude Include="src\Dimon\Render\Buffer.h" />
     <ClInclude Include="src\Dimon\Render\GraphicsContext.h" />
     <ClInclude Include="src\Dimon\Render\OrthographicCamera.h" />
+    <ClInclude Include="src\Dimon\Render\OrthographicCameraController.h" />
     <ClInclude Include="src\Dimon\Render\Renderer.h" />
+    <ClInclude Include="src\Dimon\Render\Renderer2D.h" />
     <ClInclude Include="src\Dimon\Render\RendererAPI.h" />
     <ClInclude Include="src\Dimon\Render\RendererCommand.h" />
     <ClInclude Include="src\Dimon\Render\VertexArray.h" />
     <ClInclude Include="src\Dimon\Shaders\Shader.h" />
     <ClInclude Include="src\Dimon\Util\FileUtil.h" />
     <ClInclude Include="src\Dimon\Util\TimeStep.h" />
-    <ClInclude Include="src\Dimon\Window.h" />
+    <ClInclude Include="src\Dimon\Core\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -564,16 +567,18 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Dimon\Application.cpp" />
+    <ClCompile Include="src\Dimon\Core\Application.cpp" />
     <ClCompile Include="src\Dimon\Layer\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Dimon\Layer\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Dimon\Layer\Layer.cpp" />
     <ClCompile Include="src\Dimon\Layer\LayerStack.cpp" />
-    <ClCompile Include="src\Dimon\Log.cpp" />
+    <ClCompile Include="src\Dimon\Core\Log.cpp" />
     <ClCompile Include="src\Dimon\Network\ChatServer.cpp" />
     <ClCompile Include="src\Dimon\Render\Buffer.cpp" />
     <ClCompile Include="src\Dimon\Render\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Dimon\Render\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Dimon\Render\Renderer.cpp" />
+    <ClCompile Include="src\Dimon\Render\Renderer2D.cpp" />
     <ClCompile Include="src\Dimon\Render\RendererAPI.cpp" />
     <ClCompile Include="src\Dimon\Render\RendererCommand.cpp" />
     <ClCompile Include="src\Dimon\Render\VertexArray.cpp" />

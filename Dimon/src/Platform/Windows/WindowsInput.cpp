@@ -1,6 +1,6 @@
 #include "dmpch.h"
 #include "WindowsInput.h"
-#include "Dimon/Application.h"
+#include "Dimon/Core/Application.h"
 #include <GLFW/glfw3.h>
 namespace Dimon {
 	CoreInput* CoreInput::s_Instance = new WindowsInput();

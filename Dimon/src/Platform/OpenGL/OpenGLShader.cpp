@@ -2,7 +2,7 @@
 
 #include "OpenGLShader.h"
 #include "Dimon/Util/FileUtil.h"
-#include "Dimon/Log.h"
+#include "Dimon/Core/Log.h"
 
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
@@ -67,6 +67,26 @@ namespace Dimon {
     void OpenGLShader::UnBind() const
     {
         glUseProgram(0);
+    }
+    void OpenGLShader::SetInt(const std::string& name, int value)
+    {
+        SetUniformInt(name, value);
+    }
+    void OpenGLShader::SetFloat(const std::string& name, const float& value)
+    {
+        SetUniformFloat(name, value);
+    }
+    void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
+    {
+        SetUniformFloat3(name, value);
+    }
+    void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value)
+    {
+        SetUniformFloat4(name, value);
+    }
+    void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
+    {
+        SetUniformMat4(name, value);
     }
     void OpenGLShader::SetUniformMat3(const std::string& name, const glm::mat3& matrix)
     {

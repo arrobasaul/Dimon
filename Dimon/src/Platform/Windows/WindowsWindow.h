@@ -1,5 +1,5 @@
 #pragma once
-#include "Dimon/Window.h"
+#include "Dimon/Core/Window.h"
 #include "Dimon/Render/GraphicsContext.h"
 #include <GLFW/glfw3.h>
 

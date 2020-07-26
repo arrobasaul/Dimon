@@ -1,15 +1,13 @@
 #include "dmpch.h"
 
-#include "Dimon/Log.h"
-//#include "Hazel/Core/Input.h"
-
+#include "Dimon/Core/Log.h"
 #include "Dimon/Events/ApplicationEvent.h"
 #include "Dimon/Events/MouseEvent.h"
 #include "Dimon/Events/KeyEvent.h"
 #include "Platform/Windows/WindowsWindow.h"
-//#include "Hazel/Renderer/Renderer.h"
+#include "Dimon/Render/Renderer.h"
 #include "Platform/OpenGL/OpenGLContext.h"
-#include "Platform/Vulkan//VulkanContext.h"
+//#include "Platform/Vulkan//VulkanContext.h"
 namespace Dimon {
 
 	static uint8_t s_GLFWWindowCount = 0;
@@ -68,8 +66,9 @@ namespace Dimon {
 			//SetVSync(true);
 			//++s_GLFWWindowCount;
 		//}
-		m_Context = new VulkanContext(m_Window);
-		auto m_Context2 = static_cast<VulkanContext*>(m_Context);
+
+		//m_Context = new VulkanContext(m_Window);
+		//auto m_Context2 = static_cast<VulkanContext*>(m_Context);
 
 		m_Context = new OpenGLContext(m_Window);
 		m_Context->Init();

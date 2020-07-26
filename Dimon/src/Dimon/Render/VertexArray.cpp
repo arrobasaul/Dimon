@@ -3,12 +3,12 @@
 #include "Renderer.h"
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 namespace Dimon {
-	VertexArray* VertexArray::Create()
+	Ref<VertexArray> VertexArray::Create()
 	{
 		switch (Renderer::GetAPI())
 		{
 			case RendererAPI::API::None:		DM_CORE_ASSERT(false, "RendererAPI::None no supported"); return nullptr;
-			case RendererAPI::API::OpenGL:		return new OpenGLVertexArray();
+			case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLVertexArray>();
 		default:
 			break;
 		}

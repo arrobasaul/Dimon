@@ -69,18 +69,6 @@
     <ClInclude Include="src\Dimon.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Dimon\Application.h">
-      <Filter>src\Dimon</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Dimon\Core.h">
-      <Filter>src\Dimon</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Dimon\CoreInput.h">
-      <Filter>src\Dimon</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Dimon\Entry.h">
-      <Filter>src\Dimon</Filter>
-    </ClInclude>
     <ClInclude Include="src\Dimon\Events\ApplicationEvent.h">
       <Filter>src\Dimon\Events</Filter>
     </ClInclude>
@@ -93,9 +81,6 @@
     <ClInclude Include="src\Dimon\Events\MouseEvent.h">
       <Filter>src\Dimon\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\Dimon\KeyCodes.h">
-      <Filter>src\Dimon</Filter>
-    </ClInclude>
     <ClInclude Include="src\Dimon\Layer\ImGui\ImGuiLayer.h">
       <Filter>src\Dimon\Layer\ImGui</Filter>
     </ClInclude>
@@ -104,12 +89,6 @@
     </ClInclude>
     <ClInclude Include="src\Dimon\Layer\LeyerStack.h">
       <Filter>src\Dimon\Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Dimon\Log.h">
-      <Filter>src\Dimon</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Dimon\MouseCodes.h">
-      <Filter>src\Dimon</Filter>
     </ClInclude>
     <ClInclude Include="src\Dimon\Network\ChatServer.h">
       <Filter>src\Dimon\Network</Filter>
@@ -143,9 +122,6 @@
     </ClInclude>
     <ClInclude Include="src\Dimon\Util\TimeStep.h">
       <Filter>src\Dimon\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Dimon\Window.h">
-      <Filter>src\Dimon</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1323,11 +1299,35 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dimon\Render\OrthographicCameraController.h" />
+    <ClInclude Include="src\Dimon\Core\Application.h">
+      <Filter>src\Dimon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Core\Core.h">
+      <Filter>src\Dimon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Core\CoreInput.h">
+      <Filter>src\Dimon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Core\Entry.h">
+      <Filter>src\Dimon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Core\KeyCodes.h">
+      <Filter>src\Dimon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Core\Log.h">
+      <Filter>src\Dimon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Core\MouseCodes.h">
+      <Filter>src\Dimon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Core\Window.h">
+      <Filter>src\Dimon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Render\Renderer2D.h" />
+    <ClInclude Include="src\Dimon\Debug\Intrumentor.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Dimon\Application.cpp">
-      <Filter>src\Dimon</Filter>
-    </ClCompile>
     <ClCompile Include="src\Dimon\Layer\ImGui\ImGuiBuild.cpp">
       <Filter>src\Dimon\Layer\ImGui</Filter>
     </ClCompile>
@@ -1339,9 +1339,6 @@
     </ClCompile>
     <ClCompile Include="src\Dimon\Layer\LayerStack.cpp">
       <Filter>src\Dimon\Layer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Dimon\Log.cpp">
-      <Filter>src\Dimon</Filter>
     </ClCompile>
     <ClCompile Include="src\Dimon\Network\ChatServer.cpp">
       <Filter>src\Dimon\Network</Filter>
@@ -1406,5 +1403,13 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\Dimon\Render\OrthographicCameraController.cpp" />
+    <ClCompile Include="src\Dimon\Core\Application.cpp">
+      <Filter>src\Dimon</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dimon\Core\Log.cpp">
+      <Filter>src\Dimon</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dimon\Render\Renderer2D.cpp" />
   </ItemGroup>
 </Project>

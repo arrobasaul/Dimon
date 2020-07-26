@@ -1,16 +1,19 @@
 #include <Dimon.h>
+#include <Dimon/Core/Entry.h>
 #include <glm/vec3.hpp> // glm::vec3
 #include <glm/vec4.hpp> // glm::vec4
 #include <glm/mat4x4.hpp> // glm::mat4
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include "ImGui/imgui.h"
 #include <glm/gtc/type_ptr.hpp>
+// Entry Point
+#include "Sandbox2D.h"
 class ExampleLeyer : public Dimon::Layer {
 public:
 	ExampleLeyer()
-		: Layer("Minecraf"), m_Camera(-1.0f, 1.0f, -1.0f, 1.0f) , CameraProsition(0)
+		: Layer("Minecraf"), m_CameraController( 1920.0f / 1440.0f )
 	{
-		m_vertexArray.reset(Dimon::VertexArray::Create());
+		m_vertexArray = Dimon::VertexArray::Create();
 		float vertices[7 * 3] = {
 			0.5f,1.0f,0.0f,0.8f,0.2f,0.8f,1.0f,
 			0.0f,0.0f,0.0f,0.2f,0.3f,0.8f,1.0f,
@@ -32,7 +35,7 @@ public:
 		m_vertexArray->AddIndexBuffer(m_IndexBuffer);
 
 
-		m_SquereVertexArray.reset(Dimon::VertexArray::Create());
+		m_SquereVertexArray = Dimon::VertexArray::Create();
 		float vertices2[5 * 4] = {
 		   -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
 			0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
@@ -66,38 +69,14 @@ public:
 	}
 	void OnUpdate(Dimon::TimeStep timeStep) override {
 		DM_CORE_TRACE("Delta Time {0} ", timeStep.GetSeconds());
+		m_CameraController.OnUpdate(timeStep);
 
-		if (Dimon::CoreInput::IsKeyPressed(DM_KEY_A)) {
-			CameraProsition.x -= CameraMoveSpeed * timeStep;
-		}
-		else if (Dimon::CoreInput::IsKeyPressed(DM_KEY_D)) {
-			CameraProsition.x += CameraMoveSpeed * timeStep;
-		}
-
-		if (Dimon::CoreInput::IsKeyPressed(DM_KEY_W)) {
-			CameraProsition.y += CameraMoveSpeed * timeStep;
-		}
-		else if (Dimon::CoreInput::IsKeyPressed(DM_KEY_S)) {
-			CameraProsition.y -= CameraMoveSpeed * timeStep;
-		}
-
-		if (Dimon::CoreInput::IsKeyPressed(DM_KEY_Q)) {
-			m_CameraRotate += CameraMoveRotate * timeStep;
-		}
-		else if (Dimon::CoreInput::IsKeyPressed(DM_KEY_E)) {
-			m_CameraRotate -= CameraMoveRotate * timeStep;
-		}
-		
 		Dimon::RendererCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		Dimon::RendererCommand::Clear();
 
-		m_Camera.SetPosition(CameraProsition);
-		m_Camera.SetRotation(m_CameraRotate);
-
-		Dimon::Renderer::BeginScene(m_Camera);
+		Dimon::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
-
 
 		std::dynamic_pointer_cast<Dimon::OpenGLShader>(m_Shader2)->Bind();
 		std::dynamic_pointer_cast<Dimon::OpenGLShader>(m_Shader2)->SetUniformFloat3("u_Color", m_SquereColor);
@@ -112,8 +91,9 @@ public:
 				Dimon::Renderer::Submit(m_SquereVertexArray, m_Shader2, trnasform);
 			}
 		}
-		m_Texture->Bind();
 		auto textShader = m_ShaderLibrary.Get("TextShaderImage");
+
+		m_Texture->Bind();
 		Dimon::Renderer::Submit(m_SquereVertexArray, textShader, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		m_ChernoTexture->Bind();
@@ -125,21 +105,27 @@ public:
 	}
 	void OnEvent(Dimon::Event& event) override {
 
-		if (event.GetEventType() == Dimon::EventType::KeyPressed) {
+		/*if (event.GetEventType() == Dimon::EventType::KeyPressed) {
 			Dimon::KeyPressedEvent& e = (Dimon::KeyPressedEvent&)event;
 			DM_CLIENT_INFO("{0}", (char)e.GetKeyCode());
 		}
 		//DM_CLIENT_TRACE("{0}", event);
 
 		Dimon::EventDispatcher dispacher(event);
-		dispacher.Dispatch<Dimon::KeyPressedEvent>(DM_BIND_EVENT_FN(ExampleLeyer::OnKeyPressed));
+		dispacher.Dispatch<Dimon::KeyPressedEvent>(DM_BIND_EVENT_FN(ExampleLeyer::OnKeyPressed));*/
+		m_CameraController.OnEvent(event);
+		if (event.GetEventType() == Dimon::EventType::WindowResize) {
+			auto& eventResize = (Dimon::WindowResizeEvent&)event;
+			float zoom = (float)eventResize.GetWidth() / 1920.0f;
+			m_CameraController.SetZoomLevel(zoom);
+		}
 	}
 	bool OnKeyPressed(Dimon::KeyPressedEvent& e) {
 		return false;
 	}
 	virtual void OnImGuiRender() override {
-		ImGui::Begin("Test");
-		ImGui::ColorEdit3("For Example", glm::value_ptr(m_SquereColor));
+		ImGui::Begin("Setting");
+		ImGui::ColorEdit3("Squere Color", glm::value_ptr(m_SquereColor));
 		ImGui::End();
 	}
 private:
@@ -153,22 +139,18 @@ private:
 	Dimon::Ref<Dimon::Texture2D> m_Texture,m_ChernoTexture;
 
 
-	Dimon::OrthographicCamera m_Camera;
-	glm::vec3 CameraProsition;
-	float CameraMoveSpeed = 2.0f;
+	Dimon::OrthographicCameraController m_CameraController;
 
 	glm::vec3 m_SquereColor = { 0.2f, 0.3f, 0.8f };
-
-
-	float m_CameraRotate = 0.0f;
-	float CameraMoveRotate = 30.0f;
 };
+
 
 class DimonGame : public Dimon::Application
 {
 public:
 	DimonGame() { 
-		PushLayer(new  ExampleLeyer()); 
+		//PushLayer(new  ExampleLeyer());
+		PushLayer(new  Sandbox2D());
 	}
 	~DimonGame() {};
 };

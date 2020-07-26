@@ -1,6 +1,6 @@
 #pragma once
 #include "dmpch.h"
-#include "Dimon/Core.h"
+#include "Dimon/Core/Core.h"
 namespace Dimon {
 	
 	enum class EventType

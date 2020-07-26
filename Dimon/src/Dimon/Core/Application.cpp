@@ -1,11 +1,11 @@
 #include "dmpch.h"
 #include "Application.h"
 
-#include "Events/MouseEvent.h"
+#include "Dimon/Events/MouseEvent.h"
 #include "Log.h"
 #include <glad/glad.h>
-#include "Render/RendererCommand.h"
-#include "Render/Renderer.h"
+#include "Dimon/Render/RendererCommand.h"
+#include "Dimon/Render/Renderer.h"
 //#include "Platform/Vulkan/VulkanContext.h"
 #include "CoreInput.h"
 #include "Dimon/Util/TimeStep.h"
@@ -30,6 +30,7 @@ namespace Dimon {
 	void Application::OnEvent(Event& e) {
 		EventDispatcher dispacher(e);
 		dispacher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN_CALLBACK(OnWindowClose));
+		dispacher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN_CALLBACK(OnWindowResize));
 		//DM_CORE_INFO("{0}", e);
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
 			(*--it)->OnEvent(e);
@@ -63,11 +64,13 @@ namespace Dimon {
 
 		while (m_Running) {
 			//contextVulkan.drawFrame();
-			float time = glfwGetTime();
+			float time = (float)glfwGetTime();
 			TimeStep timeStep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
-			for (Layer* layer : m_LayerStack)
-				layer->OnUpdate(timeStep);
+			if (!m_Minimazed) {
+				for (Layer* layer : m_LayerStack)
+					layer->OnUpdate(timeStep);
+			}
 
 			//auto [x, y] = CoreInput::GetMousePosition();
 			m_ImGuiLayer->Begin();
@@ -84,6 +87,15 @@ namespace Dimon {
 	}
 	bool Application::OnWindowClose(WindowCloseEvent& e) {
 		m_Running = false;
+		return true;
+	}
+	bool Application::OnWindowResize(WindowResizeEvent& e) {
+		if (e.GetHeight() == 0 || e.GetWidth() == 0) {
+			m_Minimazed = true;
+			return false;
+		}
+		m_Minimazed = false;
+		Renderer::OnwindowsResized(e.GetWidth(), e.GetHeight());
 		return true;
 	}
 }
