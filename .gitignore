@@ -6,3 +6,7 @@ Dimon/vendor/Vulkan/
 *.exe
 *.bat
 DimonGame/*.json
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user

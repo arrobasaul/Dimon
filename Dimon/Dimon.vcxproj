@@ -58,21 +58,19 @@
     <IntDir>..\bin-int\Debug-windows-x86_64\Dimon\</IntDir>
     <TargetName>Dimon</TargetName>
     <TargetExt>.lib</TargetExt>
-    <LibraryPath>D:\Code\c++\OpenGLRoot\Dimon\Dimon\vendor\Vulkan\Lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>vendor\Vulkan\Lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\bin\Release-windows-x86_64\Dimon\</OutDir>
     <IntDir>..\bin-int\Release-windows-x86_64\Dimon\</IntDir>
     <TargetName>Dimon</TargetName>
     <TargetExt>.lib</TargetExt>
-    <LibraryPath>D:\Code\c++\OpenGLRoot\Dimon\Dimon\vendor\Vulkan\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <OutDir>..\bin\Dist-windows-x86_64\Dimon\</OutDir>
     <IntDir>..\bin-int\Dist-windows-x86_64\Dimon\</IntDir>
     <TargetName>Dimon</TargetName>
     <TargetExt>.lib</TargetExt>
-    <LibraryPath>D:\Code\c++\OpenGLRoot\Dimon\Dimon\vendor\Vulkan\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -80,7 +78,7 @@
       <PrecompiledHeaderFile>dmpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DM_PLATFORM_WINDOWS;DM_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;DM_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\ImGui;vendor\glm;vendor\Vulkan\Include;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\ImGui;vendor\glm;vendor\stb_image;vendor\Vulkan\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -100,7 +98,7 @@
       <PrecompiledHeaderFile>dmpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DM_PLATFORM_WINDOWS;DM_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;DM_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\ImGui;vendor\glm;vendor\Vulkan\Include;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\ImGui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -115,7 +113,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -124,7 +122,7 @@
       <PrecompiledHeaderFile>dmpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DM_PLATFORM_WINDOWS;DM_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;DM_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\ImGui;vendor\glm;vendor\Vulkan\Include;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\ImGui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -139,7 +137,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -148,17 +146,18 @@
     <ClInclude Include="src\Dimon\Core\Core.h" />
     <ClInclude Include="src\Dimon\Core\CoreInput.h" />
     <ClInclude Include="src\Dimon\Core\Entry.h" />
+    <ClInclude Include="src\Dimon\Core\KeyCodes.h" />
+    <ClInclude Include="src\Dimon\Core\Log.h" />
+    <ClInclude Include="src\Dimon\Core\MouseCodes.h" />
+    <ClInclude Include="src\Dimon\Core\Window.h" />
     <ClInclude Include="src\Dimon\Debug\Intrumentor.h" />
     <ClInclude Include="src\Dimon\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Dimon\Events\Event.h" />
     <ClInclude Include="src\Dimon\Events\KeyEvent.h" />
     <ClInclude Include="src\Dimon\Events\MouseEvent.h" />
-    <ClInclude Include="src\Dimon\Core\KeyCodes.h" />
     <ClInclude Include="src\Dimon\Layer\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Dimon\Layer\Layer.h" />
     <ClInclude Include="src\Dimon\Layer\LeyerStack.h" />
-    <ClInclude Include="src\Dimon\Core\Log.h" />
-    <ClInclude Include="src\Dimon\Core\MouseCodes.h" />
     <ClInclude Include="src\Dimon\Network\ChatServer.h" />
     <ClInclude Include="src\Dimon\Render\Buffer.h" />
     <ClInclude Include="src\Dimon\Render\GraphicsContext.h" />
@@ -172,7 +171,6 @@
     <ClInclude Include="src\Dimon\Shaders\Shader.h" />
     <ClInclude Include="src\Dimon\Util\FileUtil.h" />
     <ClInclude Include="src\Dimon\Util\TimeStep.h" />
-    <ClInclude Include="src\Dimon\Core\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -568,11 +566,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dimon\Core\Application.cpp" />
+    <ClCompile Include="src\Dimon\Core\Log.cpp" />
     <ClCompile Include="src\Dimon\Layer\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Dimon\Layer\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Dimon\Layer\Layer.cpp" />
     <ClCompile Include="src\Dimon\Layer\LayerStack.cpp" />
-    <ClCompile Include="src\Dimon\Core\Log.cpp" />
     <ClCompile Include="src\Dimon\Network\ChatServer.cpp" />
     <ClCompile Include="src\Dimon\Render\Buffer.cpp" />
     <ClCompile Include="src\Dimon\Render\OrthographicCamera.cpp" />

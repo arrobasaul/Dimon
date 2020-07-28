@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImGui", "Dimon\vendor\ImGui
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dimon", "Dimon\Dimon.vcxproj", "{9CF4080D-0809-31BE-D18A-D41D3D5E2DEF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "flappybird", "flappybird\flappybird.vcxproj", "{D282D636-BE3A-1884-2742-F1DF1319B374}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -50,6 +52,12 @@ Global
 		{9CF4080D-0809-31BE-D18A-D41D3D5E2DEF}.Dist|x64.Build.0 = Dist|x64
 		{9CF4080D-0809-31BE-D18A-D41D3D5E2DEF}.Release|x64.ActiveCfg = Release|x64
 		{9CF4080D-0809-31BE-D18A-D41D3D5E2DEF}.Release|x64.Build.0 = Release|x64
+		{D282D636-BE3A-1884-2742-F1DF1319B374}.Debug|x64.ActiveCfg = Debug|x64
+		{D282D636-BE3A-1884-2742-F1DF1319B374}.Debug|x64.Build.0 = Debug|x64
+		{D282D636-BE3A-1884-2742-F1DF1319B374}.Dist|x64.ActiveCfg = Dist|x64
+		{D282D636-BE3A-1884-2742-F1DF1319B374}.Dist|x64.Build.0 = Dist|x64
+		{D282D636-BE3A-1884-2742-F1DF1319B374}.Release|x64.ActiveCfg = Release|x64
+		{D282D636-BE3A-1884-2742-F1DF1319B374}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

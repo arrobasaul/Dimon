@@ -8,6 +8,7 @@
 #include <glm/gtc/type_ptr.hpp>
 // Entry Point
 #include "Sandbox2D.h"
+
 class ExampleLeyer : public Dimon::Layer {
 public:
 	ExampleLeyer()
@@ -20,8 +21,7 @@ public:
 			1.0f,0.0f,0.0f,0.8f,0.8f,0.2f,1.0f
 		};
 
-		Dimon::Ref<Dimon::VertexBuffer> m_VertexBuffer;
-		m_VertexBuffer.reset(Dimon::VertexBuffer::Create(vertices, sizeof(vertices)));
+		Dimon::Ref<Dimon::VertexBuffer> m_VertexBuffer = Dimon::VertexBuffer::Create(vertices, sizeof(vertices));
 		Dimon::BufferLayout layout = {
 			{Dimon::ShaderDataType::Float3,"a_Position"},
 			{Dimon::ShaderDataType::Float4,"a_Color"}
@@ -30,8 +30,7 @@ public:
 		m_vertexArray->AddVertexBuffer(m_VertexBuffer);
 
 		unsigned int indices[3] = { 0,1,2 };
-		Dimon::Ref<Dimon::IndexBuffer> m_IndexBuffer;
-		m_IndexBuffer.reset(Dimon::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		Dimon::Ref<Dimon::IndexBuffer> m_IndexBuffer = Dimon::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 		m_vertexArray->AddIndexBuffer(m_IndexBuffer);
 
 
@@ -43,8 +42,7 @@ public:
 		   -0.5f,  0.5f, 0.0f, 0.0f, 1.0f 
 		};
 
-		Dimon::Ref<Dimon::VertexBuffer> squereVB;
-		squereVB.reset(Dimon::VertexBuffer::Create(vertices2, sizeof(vertices2)));
+		Dimon::Ref<Dimon::VertexBuffer> squereVB = Dimon::VertexBuffer::Create(vertices2, sizeof(vertices2));
 		Dimon::BufferLayout layout2 = {
 			{Dimon::ShaderDataType::Float3,"a_Position"},
 			{Dimon::ShaderDataType::Float2,"a_TextCoord"}
@@ -53,8 +51,7 @@ public:
 		m_SquereVertexArray->AddVertexBuffer(squereVB);
 
 		unsigned int indices2[6] = { 0, 1, 2, 2, 3, 0 };
-		Dimon::Ref<Dimon::IndexBuffer> squereIB;
-		squereIB.reset(Dimon::IndexBuffer::Create(indices2, sizeof(indices2) / sizeof(uint32_t)));
+		Dimon::Ref<Dimon::IndexBuffer> squereIB = Dimon::IndexBuffer::Create(indices2, sizeof(indices2) / sizeof(uint32_t));
 		m_SquereVertexArray->AddIndexBuffer(squereIB);
 		
 		m_Shader = Dimon::Shader::Create("fist","Resources/Shaders/fist.vert", "Resources/Shaders/fist.frag");
