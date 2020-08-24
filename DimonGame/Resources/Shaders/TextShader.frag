@@ -1,12 +1,17 @@
 #version 330 core
 
 layout(location = 0) out vec4 color;
-in vec2 v_TextCoord;
 
-uniform sampler2D u_Texture;
-uniform vec4 u_Color;
+in vec4 v_Color;
+in vec2 v_TexCoord;
+in float v_TexIndex;
+in float v_TilingFactor;
+
 uniform float u_TilingFactor;
+uniform sampler2D u_Textures[32];
+
 void main()
 {
-    color = texture(u_Texture, v_TextCoord* u_TilingFactor) * u_Color;
+    color = (texture(u_Textures[int(v_TexIndex)], v_TexCoord * v_TilingFactor))  * v_Color;
+    //color = v_Color;
 }

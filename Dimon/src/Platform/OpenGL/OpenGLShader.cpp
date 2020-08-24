@@ -72,6 +72,9 @@ namespace Dimon {
     {
         SetUniformInt(name, value);
     }
+    void OpenGLShader::SetIntArray(const std::string& name, int* values, uint32_t count) {
+        SetUniformIntArray(name, values, count);
+    }
     void OpenGLShader::SetFloat(const std::string& name, const float& value)
     {
         SetUniformFloat(name, value);
@@ -103,6 +106,11 @@ namespace Dimon {
     {
         GLint location = glGetUniformLocation(m_RenderID, name.c_str());
         glUniform1i(location, value);
+    }
+    void OpenGLShader::SetUniformIntArray(const std::string& name, int* values, uint32_t count)
+    {
+        GLint location = glGetUniformLocation(m_RenderID, name.c_str());
+        glUniform1iv(location, count, values);
     }
     void OpenGLShader::SetUniformFloat(const std::string& name, const float& value)
     {

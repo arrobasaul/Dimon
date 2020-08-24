@@ -9,7 +9,7 @@ namespace Dimon {
 		const glm::vec3& GetPosition() const { return m_Position;  }
 		void SetPosition(glm::vec3& position) { m_Position = position; RecalculateViewMatrix(); }
 
-		float GetRotation() const { return m_Rotation; }
+		auto GetRotation() const -> float { return m_Rotation; }
 		void SetRotation(float rotation) { m_Rotation = rotation; RecalculateViewMatrix(); }
 		
 		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
