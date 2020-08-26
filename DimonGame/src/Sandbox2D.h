@@ -13,6 +13,8 @@ public:
 	virtual void OnEvent(Dimon::Event& event) override;
 private:
 	Dimon::Ref<Dimon::Shader> m_FlatColorShader;
+	Dimon::Ref<Dimon::FrameBuffer> m_FrameBuffer;
+
 	Dimon::Ref<Dimon::VertexArray> m_VertexArray;
 
 	Dimon::OrthographicCameraController m_CameraController;

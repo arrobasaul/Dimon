@@ -160,6 +160,7 @@
     <ClInclude Include="src\Dimon\Layer\LeyerStack.h" />
     <ClInclude Include="src\Dimon\Network\ChatServer.h" />
     <ClInclude Include="src\Dimon\Render\Buffer.h" />
+    <ClInclude Include="src\Dimon\Render\FrameBuffer.h" />
     <ClInclude Include="src\Dimon\Render\GraphicsContext.h" />
     <ClInclude Include="src\Dimon\Render\OrthographicCamera.h" />
     <ClInclude Include="src\Dimon\Render\OrthographicCameraController.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="src\Dimon\Util\TimeStep.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFrameBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
@@ -574,6 +576,7 @@
     <ClCompile Include="src\Dimon\Layer\LayerStack.cpp" />
     <ClCompile Include="src\Dimon\Network\ChatServer.cpp" />
     <ClCompile Include="src\Dimon\Render\Buffer.cpp" />
+    <ClCompile Include="src\Dimon\Render\FrameBuffer.cpp" />
     <ClCompile Include="src\Dimon\Render\OrthographicCamera.cpp" />
     <ClCompile Include="src\Dimon\Render\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Dimon\Render\Renderer.cpp" />
@@ -586,6 +589,7 @@
     <ClCompile Include="src\Dimon\Util\FileUtil.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFrameBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />

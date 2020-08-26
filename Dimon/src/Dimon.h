@@ -18,6 +18,8 @@
 
 #include "Dimon/Render/Buffer.h"
 #include "Dimon/Shaders/Shader.h"
+#include "Dimon/Render/FrameBuffer.h"
+
 #include "Dimon/Render/VertexArray.h"
 
 #include "Dimon/Render/OrthographicCameraController.h"

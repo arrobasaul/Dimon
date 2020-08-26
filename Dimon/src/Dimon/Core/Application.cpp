@@ -38,6 +38,10 @@ namespace Dimon {
 				break;
 		}
 	}
+	void Application::Close()
+	{
+		m_Running = false;
+	}
 	Application::~Application()
 	{
 	}
