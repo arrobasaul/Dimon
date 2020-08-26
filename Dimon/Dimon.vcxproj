@@ -167,6 +167,7 @@
     <ClInclude Include="src\Dimon\Render\Renderer2D.h" />
     <ClInclude Include="src\Dimon\Render\RendererAPI.h" />
     <ClInclude Include="src\Dimon\Render\RendererCommand.h" />
+    <ClInclude Include="src\Dimon\Render\SubTexture2D.h" />
     <ClInclude Include="src\Dimon\Render\VertexArray.h" />
     <ClInclude Include="src\Dimon\Shaders\Shader.h" />
     <ClInclude Include="src\Dimon\Util\FileUtil.h" />
@@ -177,7 +178,7 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\Platform\OpenGL\Texture.h" />
+    <ClInclude Include="src\Dimon\Render\Texture.h" />
     <ClInclude Include="src\Platform\Vulkan\VulkanContext.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
@@ -579,6 +580,7 @@
     <ClCompile Include="src\Dimon\Render\Renderer2D.cpp" />
     <ClCompile Include="src\Dimon\Render\RendererAPI.cpp" />
     <ClCompile Include="src\Dimon\Render\RendererCommand.cpp" />
+    <ClCompile Include="src\Dimon\Render\SubTexture2D.cpp" />
     <ClCompile Include="src\Dimon\Render\VertexArray.cpp" />
     <ClCompile Include="src\Dimon\Shaders\Shader.cpp" />
     <ClCompile Include="src\Dimon\Util\FileUtil.cpp" />
@@ -588,7 +590,7 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\Texture.cpp" />
+    <ClCompile Include="src\Dimon\Render\Texture.cpp" />
     <ClCompile Include="src\Platform\Vulkan\VulkanContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />

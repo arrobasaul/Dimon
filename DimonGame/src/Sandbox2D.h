@@ -18,6 +18,13 @@ private:
 	Dimon::OrthographicCameraController m_CameraController;
 
 	Dimon::Ref<Dimon::Texture2D> m_DimonTexture;
+	Dimon::Ref<Dimon::Texture2D> m_DimonSpriteSheetGame;
+
+	Dimon::Ref<Dimon::SubTexture2D> m_TextureStrait, m_Texturetree, m_TextureWater, m_TexturePuente;
+
 	glm::vec4 m_SquereColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 	float contador = -90.0f;
+
+	uint32_t m_MapWidth, m_MapHeight;
+	std::unordered_map<char, Dimon::Ref<Dimon::SubTexture2D>> s_TextureMap;
 };

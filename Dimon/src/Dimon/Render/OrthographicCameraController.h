@@ -12,13 +12,13 @@ namespace Dimon {
 		void OnEvent(Event& e);
 		void OnUpdate(TimeStep e);
 
-		void SetZoomLevel(float zoomLevel) { m_ZoomLevel = zoomLevel; };
+		void SetZoomLevel(float zoomLevel) { m_ZoomLevel = zoomLevel; CalculateView();};
 		float GetZoomLevel() { return m_ZoomLevel; };
-
 
 		OrthographicCamera& GetCamera() { return m_Camera; };
 		const OrthographicCamera& GetCamera() const { return m_Camera; };
 	private:
+		void CalculateView();
 		bool OnMouseScrolled(MouseScrolledEvent& e);
 		bool OnWindowResized(WindowResizeEvent& e);
 	private:

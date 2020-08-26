@@ -6,6 +6,22 @@
 #include "Platform/OpenGL/OpenGLShader.h"
 #include "Dimon/Debug/Intrumentor.h"
 
+static const uint32_t s_MapWidth = 24;
+static const char* s_MapTiles = 
+"SSSSSSSSSSSSSSSSSSSSSSSS"
+"SSWWWWWWWWWWWWWWWWWWWWSS"
+"SSWWWWWWWWWWWWWWWWWWWWSS"
+"SSWSSSSSSTSSSSSSSSSSSWSS"
+"SSWSSTWWWTSSSSSTSSTSSWSS"
+"SSWSSTWWWTSSSSTSSSSSSWSS"
+"SSWSSSSWSSSSSSSSSTTSSWSS"
+"SSWSSTSTSSSSSTSSSTTSSWSS"
+"SSWSSSSSSSSSSSSTSSSSSWSS"
+"SSWWWWWWPWWWWWWPWWWWWWSS"
+"SSSSSSSSSSSSSSSSSSSSSSSS"
+"SSSSSSSSSSSSSSSSSSSSSSSS"
+;
+
 Sandbox2D::Sandbox2D()
 	: Layer("Minecraf"), m_CameraController(1920.0f / 1440.0f)
 {
@@ -14,6 +30,14 @@ void Sandbox2D::OnAttach()
 {
 	//auto textureShader = m_ShaderLibrary.Load("TextShaderImage", "Resources/Shaders/TextShader.vert", "Resources/Shaders/TextShader.frag");
 	m_DimonTexture = Dimon::Texture2D::Create("Resources/Texture/Checkerboard.png");
+	m_DimonSpriteSheetGame = Dimon::Texture2D::Create("Resources/Texture/DimonSpriteSheetGame.png");
+	s_TextureMap['S'] = Dimon::SubTexture2D::CreateFromCoord(m_DimonSpriteSheetGame, { 0, 21 }, { 16,16 });//S tierra
+	s_TextureMap['T'] = Dimon::SubTexture2D::CreateFromCoord(m_DimonSpriteSheetGame, { 0, 20 }, { 16,16 });//T arbol
+	s_TextureMap['W'] = Dimon::SubTexture2D::CreateFromCoord(m_DimonSpriteSheetGame, { 11, 16 }, { 16,16 });//W agua
+	s_TextureMap['P'] = Dimon::SubTexture2D::CreateFromCoord(m_DimonSpriteSheetGame, { 0, 16 }, { 16,16 });//P puente
+	m_MapWidth = s_MapWidth;
+	m_MapHeight = strlen(s_MapTiles)/ s_MapWidth;
+	m_CameraController.SetZoomLevel(5.0f);
 }
 
 void Sandbox2D::OnDetach()
@@ -36,6 +60,7 @@ void Sandbox2D::OnUpdate(Dimon::TimeStep timeStep)
 	if (contador == 90.0f)
 		contador = -90.0f;
 	{
+#if 0
 		DM_PROFILE_SCOPE("Sandbox2D::Draw");
 		Dimon::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
@@ -43,7 +68,6 @@ void Sandbox2D::OnUpdate(Dimon::TimeStep timeStep)
 
 		Dimon::Renderer2D::DrawQuad(glm::vec2({ -1.0f,0.0f }), glm::vec2({ 0.8f,0.8f }), m_SquereColor);
 		Dimon::Renderer2D::DrawQuad(glm::vec2({ 0.5f,-0.5f }), glm::vec2({ 0.5f,0.75f }), m_SquereColor);
-		Dimon::Renderer2D::DrawQuad(glm::vec3({ -5.0f, -5.0f,-0.1f }), glm::vec2({ 10.0f,10.0f }), m_DimonTexture, 10.0f);
 		//Dimon::Renderer2D::DrawQuad(glm::vec2({ 0.0f,-0.5f }), glm::vec2({ 0.5f,0.75f }), { 0.1f, 1.0f, 0.1f, 1.0f });
 		Dimon::Renderer2D::DrawRotateQuad(glm::vec3({ -2.0f, 0.0f,0.0f }), glm::vec2({ 1.0f,1.0f }), contador, m_DimonTexture, 20.0f);
 		Dimon::Renderer2D::EndScene();
@@ -55,6 +79,28 @@ void Sandbox2D::OnUpdate(Dimon::TimeStep timeStep)
 			{
 				Dimon::Renderer2D::DrawRotateQuad(glm::vec2({ x,y }), glm::vec2({ 0.45f,0.45f }), 45, m_SquereColor);
 				//Dimon::Renderer2D::DrawQuad(glm::vec2({ x,y }), glm::vec2({ 0.45f,0.45f }), { 1.0f, 0.1f, 0.1f, 1.0f });
+			}
+		}
+		Dimon::Renderer2D::EndScene();
+#endif
+
+		Dimon::Renderer2D::BeginScene(m_CameraController.GetCamera());
+
+		//Dimon::Renderer2D::DrawQuad(glm::vec3({ 0.0f, 0.0f,-0.1f }), glm::vec2({ 20.0f, 20.0f }), m_DimonTexture, 20.0f);
+		//Dimon::Renderer2D::DrawQuad(glm::vec3({ 0.0f, 0.0f, 0.0f }), glm::vec2({ 10.0f, 10.0f }), m_TextureStrait, 1.0f);
+
+		for (uint32_t y = 0; y < m_MapHeight; y++)
+		{
+			for (uint32_t x = 0; x < m_MapWidth; x++)
+			{
+				char tile = s_MapTiles[x + y * m_MapWidth];
+				Dimon::Ref<Dimon::SubTexture2D> subTexture;
+				if (s_TextureMap.find(tile) != s_TextureMap.end())
+					subTexture = s_TextureMap[tile];
+				else
+					subTexture = m_TextureStrait;
+				
+				Dimon::Renderer2D::DrawQuad(glm::vec3({ x  - m_MapWidth / 2.0f, m_MapWidth - y - m_MapWidth / 2.0f, 0.5f }), glm::vec2({ 1.0f, 1.0f }), subTexture, 1.0f);
 			}
 		}
 

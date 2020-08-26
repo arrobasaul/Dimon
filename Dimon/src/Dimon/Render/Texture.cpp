@@ -1,7 +1,7 @@
 #include "dmpch.h"
 #include "Texture.h"
 #include "Dimon/Render/Renderer.h"
-#include "OpenGLTexture.h"
+#include "Platform/OpenGL/OpenGLTexture.h"
 namespace Dimon {
 	Ref<Texture2D> Texture2D::Create(uint32_t width, uint32_t heigth)
 	{

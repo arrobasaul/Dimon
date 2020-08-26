@@ -30,12 +30,7 @@ namespace Dimon {
 		QuadVertex* QuadVertexBufferPtr = nullptr;
 
 		std::array<Ref<Texture2D>, MaxTextureSlots> TexturesSlots;
-		const std::array<glm::vec2, 4> s_TexCoord { 
-			glm::vec2({ 0.0f, 0.0f }),
-			glm::vec2({ 1.0f, 0.0f }),
-			glm::vec2({ 1.0f, 1.0f }), 
-			glm::vec2({ 0.0f, 1.0f }) 
-		};
+
 		uint32_t TextureSlotIndex = 1;
 		glm::vec4 QuadVertexPosition[4];
 
@@ -47,7 +42,7 @@ namespace Dimon {
 	{
 		s_Renderer2DStorage.QuadVA = VertexArray::Create();
 
-		s_Renderer2DStorage.QuadVB =VertexBuffer::Create(s_Renderer2DStorage.MaxVertices * sizeof(QuadVertex));
+		s_Renderer2DStorage.QuadVB = VertexBuffer::Create(s_Renderer2DStorage.MaxVertices * sizeof(QuadVertex));
 		BufferLayout layout2 = {
 			{ShaderDataType::Float3,"a_Position"},
 			{ShaderDataType::Float4,"a_Color"},
@@ -68,7 +63,7 @@ namespace Dimon {
 			quadIndices[i + 0] = offset + 0;
 			quadIndices[i + 1] = offset + 1;
 			quadIndices[i + 2] = offset + 2;
-			
+
 			quadIndices[i + 3] = offset + 2;
 			quadIndices[i + 4] = offset + 3;
 			quadIndices[i + 5] = offset + 0;
@@ -76,7 +71,7 @@ namespace Dimon {
 			offset += 4;
 		}
 
-		Ref<IndexBuffer> quadIB = IndexBuffer::Create(quadIndices, s_Renderer2DStorage.MaxIndices );
+		Ref<IndexBuffer> quadIB = IndexBuffer::Create(quadIndices, s_Renderer2DStorage.MaxIndices);
 		s_Renderer2DStorage.QuadVA->AddIndexBuffer(quadIB);
 		delete[] quadIndices;
 
@@ -94,15 +89,15 @@ namespace Dimon {
 
 		s_Renderer2DStorage.TexturesSlots[0] = s_Renderer2DStorage.WhiteTexture;
 
-		s_Renderer2DStorage.QuadVertexPosition[0] = {-0.5f, -0.5f, 0.0f, 1.0f};
+		s_Renderer2DStorage.QuadVertexPosition[0] = { -0.5f, -0.5f, 0.0f, 1.0f };
 		s_Renderer2DStorage.QuadVertexPosition[1] = { 0.5f, -0.5f, 0.0f, 1.0f };
 		s_Renderer2DStorage.QuadVertexPosition[2] = { 0.5f,  0.5f, 0.0f, 1.0f };
-		s_Renderer2DStorage.QuadVertexPosition[3] = {-0.5f,  0.5f, 0.0f, 1.0f };
+		s_Renderer2DStorage.QuadVertexPosition[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
 	}
 
 	void Renderer2D::Showtow()
 	{
-		
+
 	}
 
 	void Renderer2D::BeginScene(OrthographicCamera camera)
@@ -138,21 +133,31 @@ namespace Dimon {
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
+		constexpr float x = 2, y = 3;
+		constexpr float sheetWidth = 768, sheetHeight = 352;
+		constexpr float spriteWidth = 16, spriteHeight = 16;
+
+		constexpr glm::vec2 s_TexCoord[] = {
+			glm::vec2({ (x * spriteWidth) / sheetWidth, (y * spriteHeight) / sheetHeight }),
+			glm::vec2({ ((x + 1) * spriteWidth) / sheetWidth, (y * spriteHeight) / sheetHeight }),
+			glm::vec2({ ((x + 1) * spriteWidth) / sheetWidth, ((y + 1) * spriteHeight) / sheetHeight }),
+			glm::vec2({ (x * spriteWidth) / sheetWidth, ((y + 1) * spriteHeight) / sheetHeight })
+		};
 		if (s_Renderer2DStorage.QuadIndexCount >= s_Renderer2DStorage.MaxIndices)
 			StartNewBatch();
 
 		const float texIndex = 0.0f;
 		const float tilingFactor = 10.0f;
 
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) 
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
-		
+
 		for (int i = 0; i < 4; i++)
 		{
 			s_Renderer2DStorage.QuadVertexBufferPtr->Position = transform * s_Renderer2DStorage.QuadVertexPosition[i];
 			s_Renderer2DStorage.QuadVertexBufferPtr->Color = color;
-			s_Renderer2DStorage.QuadVertexBufferPtr->TexCoord = s_Renderer2DStorage.s_TexCoord[i];
+			s_Renderer2DStorage.QuadVertexBufferPtr->TexCoord = s_TexCoord[i];
 			s_Renderer2DStorage.QuadVertexBufferPtr->TexIndex = texIndex;
 			s_Renderer2DStorage.QuadVertexBufferPtr->TilingFactor = tilingFactor;
 			s_Renderer2DStorage.QuadVertexBufferPtr++;
@@ -166,9 +171,16 @@ namespace Dimon {
 	}
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, float tiling, const glm::vec4& color)
 	{
+		constexpr glm::vec2 s_TexCoord[] = { 
+			{0.0f,0.0f},
+			{1.0f,0.0f},
+			{1.0f,1.0f}, 
+			{0.0f,1.0f} 
+		};
+
 		if (s_Renderer2DStorage.QuadIndexCount >= s_Renderer2DStorage.MaxIndices)
 			StartNewBatch();
-		constexpr glm::vec4 colors = { 1.0f,1.0f,1.0f,1.0f }; 
+		constexpr glm::vec4 colors = { 1.0f,1.0f,1.0f,1.0f };
 
 		float textureIndex = 0.0f;
 
@@ -193,7 +205,53 @@ namespace Dimon {
 		{
 			s_Renderer2DStorage.QuadVertexBufferPtr->Position = transform * s_Renderer2DStorage.QuadVertexPosition[i];
 			s_Renderer2DStorage.QuadVertexBufferPtr->Color = color;
-			s_Renderer2DStorage.QuadVertexBufferPtr->TexCoord = s_Renderer2DStorage.s_TexCoord[i];
+			s_Renderer2DStorage.QuadVertexBufferPtr->TexCoord = s_TexCoord[i];
+			s_Renderer2DStorage.QuadVertexBufferPtr->TexIndex = textureIndex;
+			s_Renderer2DStorage.QuadVertexBufferPtr->TilingFactor = tiling;
+			s_Renderer2DStorage.QuadVertexBufferPtr++;
+		}
+		s_Renderer2DStorage.QuadIndexCount += 6;
+		s_Renderer2DStorage.Stats.QuadCount++;
+	}
+
+	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<SubTexture2D>& subTexture, float tiling, const glm::vec4& color)
+	{
+		DrawQuad({ position.x, position.y ,0.0f }, size, subTexture, tiling, color);
+	}
+	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<SubTexture2D>& subTexture, float tiling, const glm::vec4& color)
+	{
+		constexpr float quadVertexCount = 4;
+		constexpr glm::vec4 colors = { 1.0f,1.0f,1.0f,1.0f };
+
+		const glm::vec2* s_TexCoord = subTexture->GetTexCoord();
+		Ref<Texture2D> texture = subTexture->GetTexture();
+		if (s_Renderer2DStorage.QuadIndexCount >= s_Renderer2DStorage.MaxIndices)
+			StartNewBatch();
+
+		float textureIndex = 0.0f;
+
+		for (uint32_t i = 0; i < s_Renderer2DStorage.TextureSlotIndex; i++) {
+			if (*s_Renderer2DStorage.TexturesSlots[i].get() == *texture.get()) {
+				textureIndex = (float)i;
+				break;
+			}
+		}
+
+		if (textureIndex == 0.0f) {
+			textureIndex = (float)s_Renderer2DStorage.TextureSlotIndex;
+			s_Renderer2DStorage.TexturesSlots[s_Renderer2DStorage.TextureSlotIndex] = texture;
+			s_Renderer2DStorage.TextureSlotIndex++;
+		}
+
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
+			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+
+
+		for (int i = 0; i < quadVertexCount; i++)
+		{
+			s_Renderer2DStorage.QuadVertexBufferPtr->Position = transform * s_Renderer2DStorage.QuadVertexPosition[i];
+			s_Renderer2DStorage.QuadVertexBufferPtr->Color = color;
+			s_Renderer2DStorage.QuadVertexBufferPtr->TexCoord = s_TexCoord[i];
 			s_Renderer2DStorage.QuadVertexBufferPtr->TexIndex = textureIndex;
 			s_Renderer2DStorage.QuadVertexBufferPtr->TilingFactor = tiling;
 			s_Renderer2DStorage.QuadVertexBufferPtr++;
@@ -226,6 +284,13 @@ namespace Dimon {
 	void Renderer2D::DrawRotateQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
 	{
 		//DM_PROFILE_FUNTION();
+		constexpr glm::vec2 s_TexCoord[] = {
+			{0.0f,0.0f},
+			{1.0f,0.0f},
+			{1.0f,1.0f},
+			{0.0f,1.0f}
+		};
+
 		if (s_Renderer2DStorage.QuadIndexCount >= s_Renderer2DStorage.MaxIndices)
 			StartNewBatch();
 		const float texIndex = 0.0f;
@@ -236,7 +301,7 @@ namespace Dimon {
 		{
 			s_Renderer2DStorage.QuadVertexBufferPtr->Position = transform * s_Renderer2DStorage.QuadVertexPosition[i];
 			s_Renderer2DStorage.QuadVertexBufferPtr->Color = color;
-			s_Renderer2DStorage.QuadVertexBufferPtr->TexCoord = s_Renderer2DStorage.s_TexCoord[i];
+			s_Renderer2DStorage.QuadVertexBufferPtr->TexCoord = s_TexCoord[i];
 			s_Renderer2DStorage.QuadVertexBufferPtr->TexIndex = texIndex;
 			s_Renderer2DStorage.QuadVertexBufferPtr->TilingFactor = tilingFactor;
 			s_Renderer2DStorage.QuadVertexBufferPtr++;
@@ -244,12 +309,18 @@ namespace Dimon {
 		s_Renderer2DStorage.QuadIndexCount += 6;
 		s_Renderer2DStorage.Stats.QuadCount++;
 	}
-	void Renderer2D::DrawRotateQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, float tiling , const glm::vec4& color)
+	void Renderer2D::DrawRotateQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, float tiling, const glm::vec4& color)
 	{
 		DrawRotateQuad({ position.x, position.y ,0.0f }, size, rotation, texture, tiling, color);
 	}
-	void Renderer2D::DrawRotateQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, float tiling , const glm::vec4& color)
+	void Renderer2D::DrawRotateQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, float tiling, const glm::vec4& color)
 	{
+		constexpr glm::vec2 s_TexCoord[] = {
+			{0.0f,0.0f},
+			{1.0f,0.0f},
+			{1.0f,1.0f},
+			{0.0f,1.0f}
+		};
 		if (s_Renderer2DStorage.QuadIndexCount >= s_Renderer2DStorage.MaxIndices)
 			StartNewBatch();
 		constexpr glm::vec4 colors = { 1.0f,1.0f,1.0f,1.0f };
@@ -274,7 +345,7 @@ namespace Dimon {
 		{
 			s_Renderer2DStorage.QuadVertexBufferPtr->Position = transform * s_Renderer2DStorage.QuadVertexPosition[i];
 			s_Renderer2DStorage.QuadVertexBufferPtr->Color = color;
-			s_Renderer2DStorage.QuadVertexBufferPtr->TexCoord = s_Renderer2DStorage.s_TexCoord[i];
+			s_Renderer2DStorage.QuadVertexBufferPtr->TexCoord = s_TexCoord[i];
 			s_Renderer2DStorage.QuadVertexBufferPtr->TexIndex = textureIndex;
 			s_Renderer2DStorage.QuadVertexBufferPtr->TilingFactor = tiling;
 			s_Renderer2DStorage.QuadVertexBufferPtr++;
@@ -295,6 +366,49 @@ namespace Dimon {
 		s_Renderer2DStorage.QuadVA->Bind();
 		RendererCommand::DrawIndexed(s_Renderer2DStorage.QuadVA);
 #endif
+	}
+	void Renderer2D::DrawRotateQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Ref<SubTexture2D>& subTexture, float tiling, const glm::vec4& color)
+	{
+		DrawRotateQuad({ position.x, position.y ,0.0f }, size, rotation, subTexture, tiling, color);
+	}
+	void Renderer2D::DrawRotateQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<SubTexture2D>& subTexture, float tiling, const glm::vec4& color)
+	{
+		constexpr float quadVertexCount = 4;
+		constexpr glm::vec4 colors = { 1.0f,1.0f,1.0f,1.0f };
+
+		const glm::vec2* s_TexCoord = subTexture->GetTexCoord();
+		Ref<Texture2D> texture = subTexture->GetTexture();
+
+		if (s_Renderer2DStorage.QuadIndexCount >= s_Renderer2DStorage.MaxIndices)
+			StartNewBatch();
+
+		float textureIndex = 0.0f;
+
+		for (uint32_t i = 0; i < s_Renderer2DStorage.TextureSlotIndex; i++) {
+			if (*s_Renderer2DStorage.TexturesSlots[i].get() == *texture.get()) {
+				textureIndex = (float)i;
+				break;
+			}
+		}
+
+		if (textureIndex == 0.0f) {
+			textureIndex = (float)s_Renderer2DStorage.TextureSlotIndex;
+			s_Renderer2DStorage.TexturesSlots[s_Renderer2DStorage.TextureSlotIndex] = texture;
+			s_Renderer2DStorage.TextureSlotIndex++;
+		}
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f }) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+
+		for (int i = 0; i < 4; i++)
+		{
+			s_Renderer2DStorage.QuadVertexBufferPtr->Position = transform * s_Renderer2DStorage.QuadVertexPosition[i];
+			s_Renderer2DStorage.QuadVertexBufferPtr->Color = color;
+			s_Renderer2DStorage.QuadVertexBufferPtr->TexCoord = s_TexCoord[i];
+			s_Renderer2DStorage.QuadVertexBufferPtr->TexIndex = textureIndex;
+			s_Renderer2DStorage.QuadVertexBufferPtr->TilingFactor = tiling;
+			s_Renderer2DStorage.QuadVertexBufferPtr++;
+		}
+		s_Renderer2DStorage.QuadIndexCount += 6;
+		s_Renderer2DStorage.Stats.QuadCount++;
 	}
 	void Renderer2D::ResetStat()
 	{
@@ -319,21 +433,31 @@ namespace Dimon {
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color)
 	{
+		constexpr float x = 2, y = 3;
+		constexpr float sheetWidth = 768, sheetHeight = 352;
+		constexpr float spriteWidth = 16, spriteHeight = 16;
+
+		constexpr glm::vec2 s_TexCoord[] = {
+			glm::vec2({ (x * spriteWidth) / sheetWidth, (y * spriteHeight) / sheetHeight }),
+			glm::vec2({ ((x + 1) * spriteWidth) / sheetWidth, (y * spriteHeight) / sheetHeight }),
+			glm::vec2({ ((x + 1) * spriteWidth) / sheetWidth, ((y + 1) * spriteHeight) / sheetHeight }),
+			glm::vec2({ (x * spriteWidth) / sheetWidth, ((y + 1) * spriteHeight) / sheetHeight })
+		};
 		const float texIndex = 0.0f;
 		const float tilingFactor = 10.0f;
 
 		if (s_Renderer2DStorage.QuadIndexCount >= s_Renderer2DStorage.MaxIndices)
 			StartNewBatch();
 
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) 
-			* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f }) 
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
+			* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
 		for (int i = 0; i < 4; i++)
 		{
 			s_Renderer2DStorage.QuadVertexBufferPtr->Position = transform * s_Renderer2DStorage.QuadVertexPosition[i];
 			s_Renderer2DStorage.QuadVertexBufferPtr->Color = color;
-			s_Renderer2DStorage.QuadVertexBufferPtr->TexCoord = s_Renderer2DStorage.s_TexCoord[i];
+			s_Renderer2DStorage.QuadVertexBufferPtr->TexCoord = s_TexCoord[i];
 			s_Renderer2DStorage.QuadVertexBufferPtr->TexIndex = texIndex;
 			s_Renderer2DStorage.QuadVertexBufferPtr->TilingFactor = tilingFactor;
 			s_Renderer2DStorage.QuadVertexBufferPtr++;

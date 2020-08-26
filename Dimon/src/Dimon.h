@@ -21,7 +21,9 @@
 #include "Dimon/Render/VertexArray.h"
 
 #include "Dimon/Render/OrthographicCameraController.h"
-#include "Platform/OpenGL/Texture.h"
+#include "Dimon/Render/Texture.h"
+#include "Dimon/Render/SubTexture2D.h"
+
 #include "Platform/OpenGL/OpenGLShader.h"
 
 #include "Dimon/Debug/Intrumentor.h"

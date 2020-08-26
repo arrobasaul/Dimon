@@ -1,5 +1,5 @@
 #pragma once
-#include "Texture.h"
+#include "Dimon/Render/Texture.h"
 #include "glad/glad.h"
 namespace Dimon {
 	class OpenGLTexture2D : public Texture2D {
