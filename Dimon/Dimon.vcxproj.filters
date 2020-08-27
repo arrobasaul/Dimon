@@ -129,6 +129,9 @@
     <ClInclude Include="src\Dimon\Render\Buffer.h">
       <Filter>src\Dimon\Render</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dimon\Render\FrameBuffer.h">
+      <Filter>src\Dimon\Render</Filter>
+    </ClInclude>
     <ClInclude Include="src\Dimon\Render\GraphicsContext.h">
       <Filter>src\Dimon\Render</Filter>
     </ClInclude>
@@ -150,6 +153,12 @@
     <ClInclude Include="src\Dimon\Render\RendererCommand.h">
       <Filter>src\Dimon\Render</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dimon\Render\SubTexture2D.h">
+      <Filter>src\Dimon\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dimon\Render\Texture.h">
+      <Filter>src\Dimon\Render</Filter>
+    </ClInclude>
     <ClInclude Include="src\Dimon\Render\VertexArray.h">
       <Filter>src\Dimon\Render</Filter>
     </ClInclude>
@@ -168,6 +177,9 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFrameBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
@@ -182,9 +194,6 @@
     </ClInclude>
     <ClInclude Include="src\Platform\Vulkan\VulkanContext.h">
       <Filter>src\Platform\Vulkan</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
-      <Filter>src\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>src\Platform\Windows</Filter>
@@ -1335,12 +1344,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Dimon\Render\SubTexture2D.h" />
-    <ClInclude Include="src\Dimon\Render\Texture.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Dimon\Render\FrameBuffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLFrameBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dimon\Core\Application.cpp">
@@ -1367,6 +1370,9 @@
     <ClCompile Include="src\Dimon\Render\Buffer.cpp">
       <Filter>src\Dimon\Render</Filter>
     </ClCompile>
+    <ClCompile Include="src\Dimon\Render\FrameBuffer.cpp">
+      <Filter>src\Dimon\Render</Filter>
+    </ClCompile>
     <ClCompile Include="src\Dimon\Render\OrthographicCamera.cpp">
       <Filter>src\Dimon\Render</Filter>
     </ClCompile>
@@ -1385,6 +1391,12 @@
     <ClCompile Include="src\Dimon\Render\RendererCommand.cpp">
       <Filter>src\Dimon\Render</Filter>
     </ClCompile>
+    <ClCompile Include="src\Dimon\Render\SubTexture2D.cpp">
+      <Filter>src\Dimon\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dimon\Render\Texture.cpp">
+      <Filter>src\Dimon\Render</Filter>
+    </ClCompile>
     <ClCompile Include="src\Dimon\Render\VertexArray.cpp">
       <Filter>src\Dimon\Render</Filter>
     </ClCompile>
@@ -1398,6 +1410,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFrameBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
@@ -1427,11 +1442,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Dimon\Render\SubTexture2D.cpp" />
-    <ClCompile Include="src\Dimon\Render\Texture.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Dimon\Render\FrameBuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLFrameBuffer.cpp" />
   </ItemGroup>
 </Project>

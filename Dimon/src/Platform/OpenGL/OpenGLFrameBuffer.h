@@ -9,6 +9,8 @@ namespace Dimon {
 
 		virtual void Bind() override;
 		virtual void UnBind() override;
+
+		virtual void Resize(uint32_t width, uint32_t heigth) override;
 		virtual const FramebufferSpesification& GetSpesification() const override{
 			return m_Specification;
 		}

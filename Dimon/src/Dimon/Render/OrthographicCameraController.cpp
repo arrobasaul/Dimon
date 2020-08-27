@@ -51,10 +51,14 @@ namespace Dimon {
 		CalculateView();
 		return false;
 	}
+	void OrthographicCameraController::OnResize(float width, float height)
+	{
+		m_AspectRatio = width / height;
+		CalculateView();
+	}
 	bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
 	{
-		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
-		CalculateView();
+		OnResize((float)e.GetWidth() , (float)e.GetHeight());
 		return false;
 	}
 }

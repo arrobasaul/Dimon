@@ -11,7 +11,7 @@ namespace Dimon {
 
 		void OnEvent(Event& e);
 		void OnUpdate(TimeStep e);
-
+		void OnResize(float width, float height);
 		void SetZoomLevel(float zoomLevel) { m_ZoomLevel = zoomLevel; CalculateView();};
 		float GetZoomLevel() { return m_ZoomLevel; };
 

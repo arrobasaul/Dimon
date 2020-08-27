@@ -138,15 +138,15 @@ project "DimonGame"
 	{
 		"Dimon"
 	}
-
+	defines
+		{
+            "DM_PLATFORM_WINDOWS"
+		}
     filter "system:windows"
         cppdialect "C++17"
 		systemversion "latest"
 		
-		defines
-		{
-            "DM_PLATFORM_WINDOWS"
-		}
+		
 	filter "configurations:Debug"
 		defines "DM_DEBUG"
 		runtime "Debug"
@@ -190,15 +190,62 @@ project "flappybird"
 	{
 		"Dimon"
 	}
-
+	defines
+		{
+            "DM_PLATFORM_WINDOWS"
+		}
     filter "system:windows"
         cppdialect "C++17"
 		systemversion "latest"
 		
-		defines
-		{
-            "DM_PLATFORM_WINDOWS"
-		}
+		
+	filter "configurations:Debug"
+		defines "DM_DEBUG"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "DM_RELEASE"
+		runtime "Release"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "DM_DIST"
+		runtime "Release"
+		optimize "on"
+
+project "DimonEditor"
+	location "DimonEditor"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+
+	includedirs
+	{
+		"Dimon/vendor/spdlog/include",
+		"Dimon/src",
+        "Dimon/vendor",
+		"%{IncludeDir.glm}"
+	}
+
+	links
+	{
+		"Dimon"
+	}
+
+    filter "system:windows"
+		systemversion "latest"
+
 	filter "configurations:Debug"
 		defines "DM_DEBUG"
 		runtime "Debug"

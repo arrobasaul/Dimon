@@ -45,7 +45,9 @@ namespace Dimon {
 			style.WindowRounding = 0.0f;
 			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
-		
+		//m_Font = io.Fonts->AddFontDefault();
+		//auto m_Font = io.Fonts->AddFontFromFileTTF("Resources/Font/OpenSans-Regular.ttf", 120.0f);
+
 		Application& app = Application::Get();
 		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
 

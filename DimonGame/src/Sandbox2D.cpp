@@ -43,7 +43,6 @@ void Sandbox2D::OnAttach()
 	spec.Width = 1280;
 	spec.Height = 720;
 
-	m_FrameBuffer = Dimon::FrameBuffer::Create(spec);
 }
 
 void Sandbox2D::OnDetach()
@@ -60,7 +59,6 @@ void Sandbox2D::OnUpdate(Dimon::TimeStep timeStep)
 	Dimon::Renderer2D::ResetStat();
 	{
 		DM_PROFILE_SCOPE("Sandbox2D::Render");
-		m_FrameBuffer->Bind();
 		Dimon::RendererCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		Dimon::RendererCommand::Clear();
 	}
@@ -112,113 +110,25 @@ void Sandbox2D::OnUpdate(Dimon::TimeStep timeStep)
 			}
 		}
 		Dimon::Renderer2D::EndScene();
-		m_FrameBuffer->UnBind();
 #endif
 	}
 }
 
 void Sandbox2D::OnImGuiRender()
 {
-	static bool dockigEnable = true;
-	if (dockigEnable) {
-		static bool opt_fullscreen_persistant = true, DockSpaceOpen = true;
-		bool opt_fullscreen = opt_fullscreen_persistant;
-		static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
 
-		// We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
-		// because it would be confusing to have two docking targets within each others.
-		ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
-		if (opt_fullscreen)
-		{
-			ImGuiViewport* viewport = ImGui::GetMainViewport();
-			ImGui::SetNextWindowPos(viewport->Pos);
-			ImGui::SetNextWindowSize(viewport->Size);
-			ImGui::SetNextWindowViewport(viewport->ID);
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-			window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-			window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-		}
+	ImGui::Begin("Setting");
+	auto stats = Dimon::Renderer2D::GetStats();
+	ImGui::Text("Renderer2D Stats");
+	ImGui::Text("Draw Calls: %d", stats.DrawCalls);
+	ImGui::Text("Quad Counts: %d", stats.QuadCount);
+	ImGui::Text("Index Counts: %d", stats.GetTotalIndexCount());
+	ImGui::Text("Vertex Counts: %d", stats.GetTotalVertexCount());
 
-		// When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render our background and handle the pass-thru hole, so we ask Begin() to not render a background.
-		if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode)
-			window_flags |= ImGuiWindowFlags_NoBackground;
+	ImGui::ColorEdit4("Color", glm::value_ptr(m_SquereColor));
 
-		// Important: note that we proceed even if Begin() returns false (aka window is collapsed).
-		// This is because we want to keep our DockSpace() active. If a DockSpace() is inactive, 
-		// all active windows docked into it will lose their parent and become undocked.
-		// We cannot preserve the docking relationship between an active window and an inactive docking, otherwise 
-		// any change of dockspace/settings would lead to windows being stuck in limbo and never being visible.
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-		ImGui::Begin("DockSpace Demo", &DockSpaceOpen, window_flags);
-		ImGui::PopStyleVar();
 
-		if (opt_fullscreen)
-			ImGui::PopStyleVar(2);
-
-		// DockSpace
-		ImGuiIO& io = ImGui::GetIO();
-		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
-		{
-			ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
-			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
-		}
-
-		if (ImGui::BeginMenuBar())
-		{
-			if (ImGui::BeginMenu("Docking"))
-			{
-				// Disabling fullscreen would allow the window to be moved to the front of other windows, 
-				// which we can't undo at the moment without finer window depth/z control.
-				//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
-
-				if (ImGui::MenuItem("Flag: NoSplit", "", (dockspace_flags & ImGuiDockNodeFlags_NoSplit) != 0))                 dockspace_flags ^= ImGuiDockNodeFlags_NoSplit;
-				if (ImGui::MenuItem("Flag: NoResize", "", (dockspace_flags & ImGuiDockNodeFlags_NoResize) != 0))                dockspace_flags ^= ImGuiDockNodeFlags_NoResize;
-				if (ImGui::MenuItem("Flag: NoDockingInCentralNode", "", (dockspace_flags & ImGuiDockNodeFlags_NoDockingInCentralNode) != 0))  dockspace_flags ^= ImGuiDockNodeFlags_NoDockingInCentralNode;
-				if (ImGui::MenuItem("Flag: PassthruCentralNode", "", (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode) != 0))     dockspace_flags ^= ImGuiDockNodeFlags_PassthruCentralNode;
-				if (ImGui::MenuItem("Flag: AutoHideTabBar", "", (dockspace_flags & ImGuiDockNodeFlags_AutoHideTabBar) != 0))          dockspace_flags ^= ImGuiDockNodeFlags_AutoHideTabBar;
-				if (ImGui::MenuItem("Exit")) Dimon::Application::Get().Close();
-
-				ImGui::EndMenu();
-			}
-
-			ImGui::EndMenuBar();
-		}
-		ImGui::Begin("Setting");
-		auto stats = Dimon::Renderer2D::GetStats();
-		ImGui::Text("Renderer2D Stats");
-		ImGui::Text("Draw Calls: %d", stats.DrawCalls);
-		ImGui::Text("Quad Counts: %d", stats.QuadCount);
-		ImGui::Text("Index Counts: %d", stats.GetTotalIndexCount());
-		ImGui::Text("Vertex Counts: %d", stats.GetTotalVertexCount());
-
-		ImGui::ColorEdit4("Color", glm::value_ptr(m_SquereColor));
-
-		uint32_t textureId = m_FrameBuffer->GetColorAttachmentRendererID();
-
-		ImGui::Image((void*)textureId, ImVec2{ 1280, 720 });
-
-		ImGui::End();
-
-		ImGui::End();
-	}
-	else {
-		ImGui::Begin("Setting");
-		auto stats = Dimon::Renderer2D::GetStats();
-		ImGui::Text("Renderer2D Stats");
-		ImGui::Text("Draw Calls: %d", stats.DrawCalls);
-		ImGui::Text("Quad Counts: %d", stats.QuadCount);
-		ImGui::Text("Index Counts: %d", stats.GetTotalIndexCount());
-		ImGui::Text("Vertex Counts: %d", stats.GetTotalVertexCount());
-
-		ImGui::ColorEdit4("Color", glm::value_ptr(m_SquereColor));
-
-		uint32_t textureId = m_FrameBuffer->GetColorAttachmentRendererID();
-
-		ImGui::Image((void*)textureId, ImVec2{ 256.0f,256.0f });
-
-		ImGui::End();
-	}
+	ImGui::End();
 }
 
 void Sandbox2D::OnEvent(Dimon::Event& event)

@@ -1,27 +1,23 @@
 #include "dmpch.h"
-#include "WindowsInput.h"
+#include "Dimon/Core/CoreInput.h"
 #include "Dimon/Core/Application.h"
 #include <GLFW/glfw3.h>
 namespace Dimon {
-	CoreInput* CoreInput::s_Instance = new WindowsInput();
-
-	bool Dimon::WindowsInput::IsKeyPressedImpl(int key)
+	bool CoreInput::IsKeyPressed(int key)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetKey(window, key);
-
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
-	bool Dimon::WindowsInput::IsMouseButtonPressedImpl(int button)
+	bool CoreInput::IsMouseButtonPressed(int button)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetMouseButton(window, button);
-
 		return state == GLFW_PRESS;
 	}
 
-	std::pair<float, float> Dimon::WindowsInput::GetMousePositionImpl()
+	std::pair<float, float> CoreInput::GetMousePosition()
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		double x, y;
@@ -29,17 +25,17 @@ namespace Dimon {
 		return {(float)x, (float)y};
 	}
 
-	float Dimon::WindowsInput::GetMouseXImpl()
+	float CoreInput::GetMouseX()
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
-		auto[x,y] = GetMousePositionImpl();
+		auto[x,y] = GetMousePosition();
 		return x;
 	}
 
-	float Dimon::WindowsInput::GetMouseYImpl()
+	float CoreInput::GetMouseY()
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
-		auto [x, y] = GetMousePositionImpl();
+		auto [x, y] = GetMousePosition();
 		return y;
 	}
 }
