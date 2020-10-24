@@ -7,7 +7,8 @@ namespace Dimon {
 	class DimonEditor : public Application
 	{
 	public:
-		DimonEditor() {
+		DimonEditor() 
+		: Application("GameEngine Dimon"){
 			//PushLayer(new  ExampleLeyer());
 			PushLayer(new  EditorLayer());
 		}

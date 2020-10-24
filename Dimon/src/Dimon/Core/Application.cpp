@@ -16,11 +16,11 @@ namespace Dimon {
 
 	Application* Application::s_Instance = nullptr;
 	
-	Application::Application()
+	Application::Application(const std::string& name)
 	{
 		DM_CORE_ASSERT(s_Instance,"no exist")
 		s_Instance = this;
-		m_Window =  std::unique_ptr<Window>(Window::Create());
+		m_Window = Window::Create(WindowProps(name));
 		m_Window->SetEventCallback(BIND_EVENT_FN_CALLBACK(OnEvent));
 		Renderer::Init();
 
@@ -72,17 +72,22 @@ namespace Dimon {
 			TimeStep timeStep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 			if (!m_Minimazed) {
-				for (Layer* layer : m_LayerStack)
-					layer->OnUpdate(timeStep);
+				{
+					for (Layer* layer : m_LayerStack)
+						layer->OnUpdate(timeStep);
+				}
+
+				m_ImGuiLayer->Begin();
+				{
+					for (Layer* layer : m_LayerStack)
+						layer->OnImGuiRender();
+
+				}
+				m_ImGuiLayer->End();
 			}
 
 			//auto [x, y] = CoreInput::GetMousePosition();
-			m_ImGuiLayer->Begin();
-
-			for (Layer* layer : m_LayerStack)
-				layer->OnImGuiRender();
-
-			m_ImGuiLayer->End();
+			
 
 			//DM_CORE_TRACE("{0}-{1}",x,y);
 			m_Window->OnUpdate();

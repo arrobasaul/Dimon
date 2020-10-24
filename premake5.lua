@@ -20,6 +20,8 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Dimon/vendor/GLFW/include"
 IncludeDir["GLAD"] = "Dimon/vendor/GLAD/include"
+IncludeDir["Vulkan"] = "Dimon/vendor/Vulkan/Include"
+IncludeDir["VulkanLib"] = "Dimon/vendor/Vulkan/Lib"
 IncludeDir["ImGui"] = "Dimon/vendor/ImGui"
 IncludeDir["glm"] = "Dimon/vendor/glm"
 IncludeDir["stb_image"] = "Dimon/vendor/stb_image"
@@ -66,9 +68,13 @@ project "Dimon"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.GLAD}",
+		"%{IncludeDir.Vulkan}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}"
+	}
+	libdirs {
+		"%{IncludeDir.VulkanLib}"
 	}
 	defines
 		{
@@ -79,7 +85,8 @@ project "Dimon"
 		"GLFW",
 		"GLAD",
 		"ImGui",
-		"opengl32.lib"
+		"opengl32.lib",
+		"vulkan-1.lib"
 	}
 
 	filter "system:windows"
@@ -138,14 +145,14 @@ project "DimonGame"
 	{
 		"Dimon"
 	}
-	defines
-		{
-            "DM_PLATFORM_WINDOWS"
-		}
+	
     filter "system:windows"
         cppdialect "C++17"
 		systemversion "latest"
-		
+		defines
+		{
+            "DM_PLATFORM_WINDOWS"
+		}
 		
 	filter "configurations:Debug"
 		defines "DM_DEBUG"
@@ -190,14 +197,14 @@ project "flappybird"
 	{
 		"Dimon"
 	}
-	defines
-		{
-            "DM_PLATFORM_WINDOWS"
-		}
+	
     filter "system:windows"
         cppdialect "C++17"
 		systemversion "latest"
-		
+		defines
+		{
+            "DM_PLATFORM_WINDOWS"
+		}
 		
 	filter "configurations:Debug"
 		defines "DM_DEBUG"
@@ -244,8 +251,12 @@ project "DimonEditor"
 	}
 
     filter "system:windows"
+        cppdialect "C++17"
 		systemversion "latest"
-
+		defines
+		{
+            "DM_PLATFORM_WINDOWS"
+		}
 	filter "configurations:Debug"
 		defines "DM_DEBUG"
 		runtime "Debug"

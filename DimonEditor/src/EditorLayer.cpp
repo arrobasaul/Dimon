@@ -186,7 +186,6 @@ namespace Dimon {
 		ImGui::Text("Vertex Counts: %d", stats.GetTotalVertexCount());
 
 		ImGui::ColorEdit4("Color", glm::value_ptr(m_SquereColor));
-
 		ImGui::End();
 
 		//ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0,0 });

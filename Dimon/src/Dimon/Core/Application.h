@@ -13,7 +13,7 @@ namespace Dimon {
 	class DIMON_API Application
 	{
 	public:
-		Application();
+		Application(const std::string& name = "Dimon Engine");
 		virtual ~Application();
 		void Run();
 		void OnEvent(Event& e);
