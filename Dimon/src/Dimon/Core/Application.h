@@ -18,6 +18,7 @@ namespace Dimon {
 		void Run();
 		void OnEvent(Event& e);
 		void Close();
+		ImGuiLayer* GetImguiLayer() { return m_ImGuiLayer; }
 		//for Layers
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
@@ -25,7 +26,7 @@ namespace Dimon {
 		inline Window& GetWindow() { return *m_Window; }
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
-		bool Application::OnWindowResize(WindowResizeEvent& e);
+		bool OnWindowResize(WindowResizeEvent& e);
 
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;

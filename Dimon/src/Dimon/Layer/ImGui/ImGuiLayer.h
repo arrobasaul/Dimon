@@ -13,9 +13,11 @@ namespace Dimon {
 		virtual void OnDetach() override;
 		//void OnUpdate(/*Timestep ts*/) override;
 		virtual void OnImGuiRender() override;
-		//void OnEvent(Event& event);
+		void OnEvent(Event& event);
 		void Begin();
 		void End();
+		void  SetBlockEvents(bool block) { m_BlockEvents = block; }
+		bool  GetBlockEvents() { return m_BlockEvents; }
 	private:
 		/*bool OnKeyPressedEvent(KeyPressedEvent& e);
 		bool OnKeyReleasedEvent(KeyReleasedEvent& e);
@@ -26,6 +28,7 @@ namespace Dimon {
 		bool OnMouseScrolledEvent(MouseScrolledEvent& e);
 		bool OnWindowResizeEvent(WindowResizeEvent& e);*/
 	private:
+		bool m_BlockEvents = true;
 		float m_Time = 0.0f;
 	};
 }

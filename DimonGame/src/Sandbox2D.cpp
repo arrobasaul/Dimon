@@ -127,7 +127,7 @@ void Sandbox2D::OnImGuiRender()
 
 	ImGui::ColorEdit4("Color", glm::value_ptr(m_SquereColor));
 
-	uin32_t textureID = m_DimonTexture->ge
+	//uin32_t textureID = m_DimonTexture->ge
 	ImGui::End();
 }
 

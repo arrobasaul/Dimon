@@ -50,7 +50,8 @@ namespace Dimon {
 		DM_PROFILE_FUNCTION();
 		{
 			DM_PROFILE_SCOPE("m_CameraController.OnUpdate");
-			m_CameraController.OnUpdate(timeStep);
+			if (m_viewPortFocused)
+				m_CameraController.OnUpdate(timeStep);
 		}
 		Dimon::Renderer2D::ResetStat();
 		{
@@ -60,8 +61,6 @@ namespace Dimon {
 			Dimon::RendererCommand::Clear();
 		}
 		{
-
-
 #if 1
 			DM_PROFILE_SCOPE("Sandbox2D::Draw");
 			Dimon::Renderer2D::BeginScene(m_CameraController.GetCamera());
@@ -191,8 +190,14 @@ namespace Dimon {
 		//ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0,0 });
 
 		ImGui::Begin("Editor");
+
+		m_viewPortFocused = ImGui::IsWindowFocused();
+		m_viewPortHovered = ImGui::IsWindowHovered();
+
+		Application::Get().GetImguiLayer()->SetBlockEvents(!m_viewPortFocused|| !m_viewPortHovered);
+		
 		ImVec2 ViewPortPanelSize = ImGui::GetContentRegionAvail();
-		if (m_ViePortSize != *((glm::vec2*) & ViewPortPanelSize)) {
+		if (m_ViePortSize != *((glm::vec2*) & ViewPortPanelSize) && ViewPortPanelSize.x > 0 && ViewPortPanelSize.y >0) {
 			m_FrameBuffer->Resize((uint32_t)ViewPortPanelSize.x, (uint32_t)ViewPortPanelSize.y);
 			m_ViePortSize = { ViewPortPanelSize.x, ViewPortPanelSize.y };
 

@@ -25,6 +25,7 @@ IncludeDir["VulkanLib"] = "Dimon/vendor/Vulkan/Lib"
 IncludeDir["ImGui"] = "Dimon/vendor/ImGui"
 IncludeDir["glm"] = "Dimon/vendor/glm"
 IncludeDir["stb_image"] = "Dimon/vendor/stb_image"
+IncludeDir["entt"] = "Dimon/vendor/entt"
 
 group "Dependencies"
 	include "Dimon/vendor/GLFW"
@@ -52,6 +53,7 @@ project "Dimon"
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/stb_image/**.h",
 		"%{prj.name}/vendor/stb_image/**.cpp",
+		"%{prj.name}/vendor/entt/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
@@ -71,7 +73,8 @@ project "Dimon"
 		"%{IncludeDir.Vulkan}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.entt}"
 	}
 	libdirs {
 		"%{IncludeDir.VulkanLib}"

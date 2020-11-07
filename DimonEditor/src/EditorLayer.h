@@ -19,7 +19,7 @@ namespace Dimon {
 		Ref<VertexArray> m_VertexArray;
 		Ref<Shader> m_FlatColorShader;
 		Ref<FrameBuffer> m_FrameBuffer;
-
+		bool m_viewPortFocused = false, m_viewPortHovered = false;
 		Ref<Texture2D> m_DimonTexture;
 		glm::vec2 m_ViePortSize = {0.0f,0.0f};
 		glm::vec4 m_SquereColor = { 0.2f, 0.3f, 0.8f, 1.0f };

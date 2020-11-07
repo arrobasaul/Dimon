@@ -32,10 +32,16 @@ namespace Dimon {
 		dispacher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN_CALLBACK(OnWindowClose));
 		dispacher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN_CALLBACK(OnWindowResize));
 		//DM_CORE_INFO("{0}", e);
-		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
+		/*for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
 			(*--it)->OnEvent(e);
 			if (e.Handled)
 				break;
+		}*/
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
+		{
+			if (e.Handled)
+				break;
+			(*it)->OnEvent(e);
 		}
 	}
 	void Application::Close()
